@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import urllib3
 import urllib
 import certifi
+import time
 # vjk=66c82be83c389f01
 # test method that returns a list of jobs
 # limit should be in increments of 10
@@ -38,9 +39,12 @@ def retrieve_urls(query,zipcode,page_limit):
 def getJD(href):
     # link = "https://indeed.com/rc/clk?jk=d2dcaad5873c0ccd&amp;fccid=cad0c703787d24ae&amp;vjs=3"
 
-    link = "https://indeed.com" + href
+    link = "https://indeed.com" + str(href)
+    initial_response = urllib.request.urlopen(link)
+    finalLink = initial_response.geturl()
+
     http = urllib3.PoolManager(cert_reqs = 'CERT_REQUIRED', ca_certs = certifi.where())
-    response = http.request('GET', link)
+    response = http.request('GET', finalLink)
     html = response.data
 
     soup = BeautifulSoup(html, 'html.parser')
@@ -78,8 +82,8 @@ def getJobIDS(query,location,page_limit):
 
 def main():
     hrefs = retrieve_urls('Java developer', 11590,10)
-
-    # Getting max retry error at function call
-    getJD(hrefs[1])
+    time.sleep(5)
+    for i in range(0,10,1):
+        getJD(hrefs[i])
 main()
 
