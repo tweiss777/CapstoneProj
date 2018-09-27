@@ -36,11 +36,16 @@ def retrieve_urls(query,zipcode,page_limit):
     return total_job_links
 
 # tesmethod that returns individual job description
-def getJD(href):
+def getJob(href):
     # link = "https://indeed.com/rc/clk?jk=d2dcaad5873c0ccd&amp;fccid=cad0c703787d24ae&amp;vjs=3"
 
+    #site url contatinated with the href taken from the dom
     link = "https://indeed.com" + str(href)
+
+    # retrieve the url even if its a redirect
     initial_response = urllib.request.urlopen(link)
+
+    # final link of the redirect if there is one
     finalLink = initial_response.geturl()
 
     http = urllib3.PoolManager(cert_reqs = 'CERT_REQUIRED', ca_certs = certifi.where())
@@ -48,42 +53,29 @@ def getJD(href):
     html = response.data
 
     soup = BeautifulSoup(html, 'html.parser')
-
+    job_title = soup.title.string
+    job_title = job_title.split('-')[0].rstrip()
     #return the markup for the specific jd
-    print(soup.prettify())
+    # print(soup.prettify())
 
+    #find the tag that holds the description.
+    jdMarkup = soup.find_all('div',class_='jobsearch-JobComponent-description')
+    print(job_title)
+
+    if len(jdMarkup) < 1:
+        return
+
+    return(job_title, jdMarkup[0].get_text())
 
 
 #test method that returns the job ids
-def getJobIDS(query,location,page_limit):
-    page = 0
-    totalJobIds = []
-
-    while page <= page_limit:
-        params = {'q':query,
-                  'l':str(location),
-                  'start':str(page_limit)}
-
-        link = "https://www.indeed.com/jobs?" + urllib.parse.urlencode(params)
-        http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
-        response = http.request('GET', link)
-        html = response.data
-        soup = BeautifulSoup(html, 'html.parser')
-
-        #retrieve div tags that have the job ids
-        divs = soup.find_all('div')
-
-
-        page += 10
-
-
-    # return totalJobIds
 
 
 def main():
+
     hrefs = retrieve_urls('Java developer', 11590,10)
     time.sleep(5)
     for i in range(0,10,1):
-        getJD(hrefs[i])
+        getJob(hrefs[i])
 main()
 
