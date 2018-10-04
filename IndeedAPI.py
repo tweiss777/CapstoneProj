@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import urllib3
 import urllib.request
 import certifi
-import time
 
 # Class for indeed api
 class IndeedAPi:
@@ -35,7 +34,7 @@ class IndeedAPi:
         return total_job_links
 
     # test method that returns individual job description
-    def getJob(self,href):
+    def getJobMarkup(self,href):
 
         #site url contatinated with the href taken from the dom
         link = "https://indeed.com" + str(href)
@@ -62,12 +61,25 @@ class IndeedAPi:
         # when the job description cannot be found
         if len(jdMarkup) < 1:
             return
+        # return the title of the job and the html markup
+        return(job_title, jdMarkup[0])
 
-        return(job_title, jdMarkup[0].get_text())
+
 
     #method that filters out NoneType indices in the jobs list
     def filterJobs(self,jobs):
         filtered_jobs = [job for job in jobs if job is not None]
         return filtered_jobs
 
+    #method that will generate a json api for the jobs
+    def generateJson(self,jobs):
+        #assign a job_id to the job
+        job_id = 0
+        #initialize our json data to an empty dictionary at first
+        json_data = {}
+        for job in jobs:
+            #set an empty dictionary to the job_id key
+            json_data[job_id] = {}
+            #set the title key to the title found in the first part of the tuple
+            json_data[job_id]["title"] = job[0]
 
