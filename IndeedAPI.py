@@ -72,6 +72,7 @@ class IndeedAPi:
         return filtered_jobs
 
     #method that will generate a json api for the jobs
+    #returns a dictionary that should be exported as json data
     def generateJson(self,jobs):
         #assign a job_id to the job
         job_id = 0
@@ -81,5 +82,29 @@ class IndeedAPi:
             #set an empty dictionary to the job_id key
             json_data[job_id] = {}
             #set the title key to the title found in the first part of the tuple
-            json_data[job_id]["title"] = job[0]
+            json_data[job_id]["title"] = job[0] #taken from the 0th indice of the tuple.
+            # store the markup in the markup variable
+            markup = job[1]
+
+            #if ul tags are found
+            if len(markup.find_all('ul')) > 0:
+                #add the tags
+                requirements = markup.find_all("ul")
+                #requirements represented as a list
+                requirementsStr = ""
+                for r in requirements:
+                    requirementsStr += r.get_text()
+
+            #store the requirements and description into their respective keys
+            json_data[job_id]["requirements"] = requirementsStr
+            json_data[job_id]["description"] = markup.get_text()
+
+            #increment the job_id count by 1
+            job_id +=1
+
+            # return the json data
+        return json_data
+
+
+
 
