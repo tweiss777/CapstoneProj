@@ -96,7 +96,7 @@ class IndeedAPi:
                     requirementsStr += r.get_text()
 
             #store the requirements and description into their respective keys
-            json_data[job_id]["requirements"] = requirementsStr
+                json_data[job_id]["requirements"] = requirementsStr
             json_data[job_id]["description"] = markup.get_text()
 
             #increment the job_id count by 1
