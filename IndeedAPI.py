@@ -86,19 +86,7 @@ class IndeedAPi:
             # store the markup in the markup variable
             markup = job[1]
 
-            #if ul tags are found
-            if len(markup.find_all('ul')) > 0:
-                #add the tags
-                requirements = markup.find_all("ul")
-                #requirements represented as a list
-                requirementsStr = ""
-                for r in requirements:
-                    requirementsStr += r.get_text()
-
-            #store the requirements and description into their respective keys
-                json_data[job_id]["requirements"] = requirementsStr
             json_data[job_id]["description"] = markup.get_text()
-
             #increment the job_id count by 1
             job_id +=1
 
