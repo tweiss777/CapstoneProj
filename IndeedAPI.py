@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 import urllib3
 import urllib.request
 import certifi
+from RakeFunctions import *
 
 # Class for indeed api
 class IndeedAPi:
-
     # limit should be in increments of 10
     def retrieve_urls(self,query,zipcode,page_limit):
 
@@ -74,6 +74,7 @@ class IndeedAPi:
     #method that will generate a json api for the jobs
     #returns a dictionary that should be exported as json data
     def generateJson(self,jobs):
+        r = RakeFunctions()
         #assign a job_id to the job
         job_id = 0
         #initialize our json data to an empty dictionary at first
@@ -85,8 +86,8 @@ class IndeedAPi:
             json_data[job_id]["title"] = job[0] #taken from the 0th indice of the tuple.
             # store the markup in the markup variable
             markup = job[1]
-
             json_data[job_id]["description"] = markup.get_text()
+            json_data[job_id]["keywords"] = r.process_rake(json_data[job_id]["description"])
             #increment the job_id count by 1
             job_id +=1
 
