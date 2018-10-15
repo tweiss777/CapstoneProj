@@ -111,3 +111,8 @@ Apikey.txt
 .idea/workspace.xml
 *.txt
 
+# Microsoft office formats
+*.doc
+*.docx
+*.docx
+

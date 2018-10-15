@@ -1,8 +1,8 @@
 # Test file that extracts
 
+from docx import Document
+
 from IndeedAPI import *
-# from RakeFunctions import *
-import json
 
 #data needs to be exported to json.
 
@@ -21,14 +21,13 @@ unfiltered_jobs = [indeedApi.getJobMarkup(url) for url in job_urls]
 filtered_jobs = indeedApi.filterJobs(unfiltered_jobs)
 
 #takes the filtered jobs and creates a dictionary that holds all the jobs
-# key = {job_id: {title: "string", description: "string"}}
+# key = {job_id: {title: "string", description: "string", keywords: ["String"]}}
 json_data = indeedApi.generateJson(filtered_jobs)
 
-#make a new dictionary for keywords
+# extract text from documents
+file = open("TalWeissResume.docx", 'rb')
+d = Document(file)
+fullText = []
 
-
-
-
-
-
-
+for p in d.paragraphs:
+    fullText.append(p.text)
