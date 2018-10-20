@@ -56,7 +56,7 @@ for i in range(len(json_data)):
     jobsNoStopWords[i]["title"] = json_data[i]["title"]
 
     # Store the words with the stopwords stripped out represented as a list
-    jobsNoStopWords[i]["descriptionNoStopWords"] = [w for w in json_data[i]["description"] if
+    jobsNoStopWords[i]["descriptionNoStopWords"] = [w for w in json_data[i]["description"].split() if
                                                     w not in stopwords.words('english')]
 
 
