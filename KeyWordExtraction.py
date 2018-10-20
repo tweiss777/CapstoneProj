@@ -46,7 +46,12 @@ for i in range(len(fullText)):
 resumeNoStopWords = [word for word in resumetext.split() if word not in stopwords.words('english')]
 
 # iterate through json_data job title and description and strip the stopwords from the description
-jobsNoStopWords = {}  # job_id: {title: "string", description:
+jobsNoStopWords = {}  # job_id: {title: "string", descriptionNoStopwords: []
+job_id = 0
 for i in range(len(json_data)):
+    jobsNoStopWords[job_id] = {}
+    jobsNoStopWords[job_id]["title"] = json_data[job_id]["title"]
+    # jobsNoStopWords[job_id]["descriptionNoStop"]
+
 
 # now we will run tf-idf on both the job descriptions and the resume & strip the stopwords
