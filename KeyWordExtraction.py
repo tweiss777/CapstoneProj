@@ -35,13 +35,15 @@ for p in d.paragraphs:
     fullText.append(p.text)
 
 resumetext = ""  # empty string which should hold the text of the resume
+
+# Iterate through the array removing indices that have length of 0
+for i in range(len(fullText)):
+    if len(fullText[i]) == 0:
+        fullText.pop(i)
 # iterate through the fullText array and strip \n and \t
 for i in range(len(fullText)):
-    if len(fullText[i] > 0):
-        fullText[i] = re.sub("\s+", " ", fullText[i])  # if there is text remove the extra space and the and the tabs
-        resumetext = resumetext + fullText[i] + " "  # concatinate part of the resume text to the job description
-    else:
-        fullText.pop(i)  # no text? remove it from the list
+    fullText[i] = re.sub("\s+", " ", fullText[i])  # if there is text remove the extra space and the and the tabs
+    resumetext = resumetext + fullText[i] + " "  # concatinate part of the resume text to the job description
 
 resumeNoStopWords = [word for word in resumetext.split() if word not in stopwords.words('english')]
 
