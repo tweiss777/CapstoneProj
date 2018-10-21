@@ -26,26 +26,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="13" />
+          <entry key="py" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="13" />
+          <entry key="Python" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Python Console" value="2717" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="5705" />
-          <entry key="txt" value="271" />
+          <entry key="py" value="5846" />
+          <entry key="txt" value="273" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="272" />
-          <entry key="Python" value="8422" />
+          <entry key="PLAIN_TEXT" value="274" />
+          <entry key="Python" value="8563" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -106,11 +106,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="-73">
+              <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
               <folding>
                 <element signature="e#26#35#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RakeFunctions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -471,7 +480,21 @@
       <option name="project" value="LOCAL" />
       <updated>1540065621330</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="created dictionary that holds the words stripped of stopwords">
+      <created>1540066382496</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1540066382496</updated>
+    </task>
+    <task id="LOCAL-00010" summary="created dictionary that holds the words stripped of stopwords">
+      <created>1540066392446</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1540066392446</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -487,7 +510,7 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978308" visible="true" weight="0.18824464" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978308" visible="true" weight="0.18824464" />
       <window_info id="Structure" order="1" sideWeight="0.5021692" side_tool="true" weight="0.11643836" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -500,7 +523,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" visible="true" weight="0.3286334" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.32739726" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50119144" side_tool="true" weight="0.35479453" />
-      <window_info active="true" anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" order="10" sideWeight="0.49841937" type="WINDOWED" visible="true" weight="0.3557484" />
+      <window_info anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" order="10" sideWeight="0.49841937" type="WINDOWED" visible="true" weight="0.3557484" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -600,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RakeFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
@@ -617,10 +633,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RakeFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="-73">
+          <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
           <folding>
             <element signature="e#26#35#0" expanded="true" />
           </folding>
