@@ -4,6 +4,7 @@ import re
 import nltk
 from docx import Document
 from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 from IndeedAPI import *
 
@@ -12,7 +13,6 @@ from IndeedAPI import *
 
 #Initialize the necessary objects
 indeedApi = IndeedAPi()
-# rfunctions = RakeFunctions()
 
 
 job_urls = indeedApi.retrieve_urls("Java developer",11590,10)
@@ -120,3 +120,33 @@ for i in range(len(jobsNoStopWordsUpdated)):
 # the query will be the job description
 # now we will run tf-idf on both the job descriptions and the resume & strip the stopwords
 # for now assume the resume will be the query as i have currently one resume and multiple job descriptions
+# consider concatinating the job title to the description....
+print("Performing tf-idf for jobs")
+
+vectorizer = CountVectorizer()
+corpus = []
+for i in range(len(jobsNoStopWordsUpdated)):
+    corpus.append(" ".join(word for word in jobsNoStopWordsUpdated[i]["description"]))
+
+x = vectorizer.fit_transform(corpus)
+
+# initialze and a tf idf transformer object
+tfidf_transformer = TfidfTransformer(smooth_idf=True, use_idf=True)
+tfidf_transformer.fit(x)
+
+# get feature names
+feature_names = vectorizer.get_feature_names()
+
+# create the tf-idf vector
+tf_idf_vector = tfidf_transformer.transform(vectorizer.transform(corpus))
+print("tf-idf complete! \n")
+
+# Do the same for the resume...
+print("performing tf-idf for the resume (query)")
+resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
+vectorizer_resume = CountVectorizer()  # initialize a new CountVectorizer object
+y = vectorizer_resume.fit_transform([resumeCorpus])
+
+# run the cosine distance or use the tf-idf function you made
+
+print("process complete!")
