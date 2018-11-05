@@ -4,7 +4,8 @@ import re
 import nltk
 from docx import Document
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 from IndeedAPI import *
 
@@ -117,36 +118,31 @@ for i in range(len(jobsNoStopWordsUpdated)):
             jobsNoStopWordsUpdated[i]["description"][j] = jobsNoStopWordsUpdated[i]["description"][j].replace(
                 jobsNoStopWordsUpdated[i]["description"][j][-1], "")
 
+# Done with preprocessing
 # the query will be the job description
 # now we will run tf-idf on both the job descriptions and the resume & strip the stopwords
 # for now assume the resume will be the query as i have currently one resume and multiple job descriptions
 # consider concatinating the job title to the description....
 print("Performing tf-idf for jobs")
 
-vectorizer = CountVectorizer()
+tfidf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False)
 corpus = []
 for i in range(len(jobsNoStopWordsUpdated)):
     corpus.append(" ".join(word for word in jobsNoStopWordsUpdated[i]["description"]))
 
-x = vectorizer.fit_transform(corpus)
+# sparse matrix for the job corpus
+x = tfidf_vectorizer.fit_transform(corpus)
 
-# initialze and a tf idf transformer object
-tfidf_transformer = TfidfTransformer(smooth_idf=True, use_idf=True)
-tfidf_transformer.fit(x)
 
-# get feature names
-feature_names = vectorizer.get_feature_names()
-
-# create the tf-idf vector
-tf_idf_vector = tfidf_transformer.transform(vectorizer.transform(corpus))
 print("tf-idf complete! \n")
 
 # Do the same for the resume...
 print("performing tf-idf for the resume (query)")
 resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
-vectorizer_resume = CountVectorizer()  # initialize a new CountVectorizer object
-y = vectorizer_resume.fit_transform([resumeCorpus])
+# vectorizer_resume = CountVectorizer()  # initialize a new CountVectorizer object
 
-# run the cosine distance or use the tf-idf function you made
+# sparse matrix for the resume
+y = tfidf_vectorizer.transform([resumeCorpus])
 
-print("process complete!")
+# run the cosine similarity
+similarity = cosine_similarity(x, y)
