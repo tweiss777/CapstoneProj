@@ -128,11 +128,15 @@ print("Performing tf-idf for jobs")
 tfidf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False)
 corpus = []
 for i in range(len(jobsNoStopWordsUpdated)):
+    # concatinate the job title to the description
+    jobsNoStopWordsUpdated[i]["description"] = jobsNoStopWordsUpdated[i]["title"] + " " + jobsNoStopWordsUpdated[
+        "description"]
+
     corpus.append(" ".join(word for word in jobsNoStopWordsUpdated[i]["description"]))
 
-# sparse matrix for the job corpus
+# document term matrix (and learn the vocabulary) for the jobs
 x = tfidf_vectorizer.fit_transform(corpus)
-
+features = tfidf_vectorizer.get_feature_names()  # get the vocabulary from the job dataset
 
 print("tf-idf complete! \n")
 
@@ -141,7 +145,7 @@ print("performing tf-idf for the resume (query)")
 resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
 # vectorizer_resume = CountVectorizer()  # initialize a new CountVectorizer object
 
-# sparse matrix for the resume
+# document term matrix for resume
 y = tfidf_vectorizer.transform([resumeCorpus])
 
 # run the cosine similarity
