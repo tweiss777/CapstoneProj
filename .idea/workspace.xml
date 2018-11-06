@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KeyWordExtraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/KeyWordExtraction.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,16 +39,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="9378" />
+          <entry key="Python Console" value="10072" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="9549" />
-          <entry key="txt" value="501" />
+          <entry key="py" value="9975" />
+          <entry key="txt" value="568" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="502" />
-          <entry key="Python" value="18927" />
+          <entry key="PLAIN_TEXT" value="569" />
+          <entry key="Python" value="20047" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -110,8 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-124">
-              <caret line="126" selection-start-line="126" selection-end-line="126" />
+            <state relative-caret-position="-12">
+              <caret line="137" column="89" selection-start-line="137" selection-start-column="89" selection-end-line="137" selection-end-column="89" />
               <folding>
                 <element signature="e#26#35#0" expanded="true" />
               </folding>
@@ -165,20 +164,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CapstoneProj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CapstoneProj" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="full.screen.before.presentation.mode" value="true" />
@@ -404,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541437011839</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="removed count vectorizer.&#10;&#10;running cosine similarity">
+      <created>1541441899914</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1541441899914</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -429,10 +422,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.3286334" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.3275862" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.32739726" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50119144" side_tool="true" weight="0.35479453" />
-      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" order="10" sideWeight="0.49841937" visible="true" weight="0.44043887" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5019857" side_tool="true" weight="0.44043887" />
+      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" order="10" sideWeight="0.4980143" visible="true" weight="0.47492164" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -498,7 +491,8 @@
     <MESSAGE value="added an extra loop" />
     <MESSAGE value="- removed special characters and punctuation from the last indice in each word from the jd and resume sections.&#10;- need to implement tf-idf." />
     <MESSAGE value="Made a countvectorizer for the resume" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made a countvectorizer for the resume" />
+    <MESSAGE value="removed count vectorizer.&#10;&#10;running cosine similarity" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed count vectorizer.&#10;&#10;running cosine similarity" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -561,8 +555,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-124">
-          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        <state relative-caret-position="-12">
+          <caret line="137" column="89" selection-start-line="137" selection-start-column="89" selection-end-line="137" selection-end-column="89" />
           <folding>
             <element signature="e#26#35#0" expanded="true" />
           </folding>
