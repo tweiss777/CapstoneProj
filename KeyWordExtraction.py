@@ -129,10 +129,8 @@ tfidf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False)
 corpus = []
 for i in range(len(jobsNoStopWordsUpdated)):
     # concatinate the job title to the description
-    jobsNoStopWordsUpdated[i]["description"] = jobsNoStopWordsUpdated[i]["title"] + " " + jobsNoStopWordsUpdated[
-        "description"]
-
-    corpus.append(" ".join(word for word in jobsNoStopWordsUpdated[i]["description"]))
+    corpus.append(
+        jobsNoStopWordsUpdated[i]["title"] + " " + " ".join(word for word in jobsNoStopWordsUpdated[i]["description"]))
 
 # document term matrix (and learn the vocabulary) for the jobs
 x = tfidf_vectorizer.fit_transform(corpus)
