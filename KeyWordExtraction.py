@@ -147,4 +147,17 @@ resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
 y = tfidf_vectorizer.transform([resumeCorpus])
 
 # run the cosine similarity
-similarity = cosine_similarity(x, y)
+similarity = cosine_similarity(x, y).flatten()
+
+# sort to find the related documents based on highest cosine similarity score
+related_document_indices = similarity.argsort()[:-5:-1]  # this is for the top 5 scores
+
+# top 5 documents with cosine similarity scores are here
+top_5 = {}
+for i in related_document_indices:
+    top_5[i] = (similarity[i], corpus[i])
+
+# id 2 word dictionary taken from the tf idf vectorizer
+id2word = {}
+for word, id in tfidf_vectorizer.vocabulary_.items():
+    id2word[id] = word
