@@ -50,6 +50,7 @@ for i in range(len(fullText)):
     fullText[i] = re.sub("\s+", " ", fullText[i])  # if there is text remove the extra space and the and the tabs
     resumetext = resumetext + fullText[i] + " "  # concatinate part of the resume text to the job description
 
+# strip the stopwords from the resume
 resumeNoStopWords = [word for word in resumetext.split() if word not in stopwords.words('english')]
 
 # iterate through the words in the resume and remove the terms that are less than 2 and contain any special characters
@@ -125,7 +126,8 @@ for i in range(len(jobsNoStopWordsUpdated)):
 # consider concatinating the job title to the description....
 print("Performing tf-idf for jobs")
 
-tfidf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False)
+# strip the stopwords
+tfidf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False, stop_words=stopwords.words('english'))
 corpus = []
 for i in range(len(jobsNoStopWordsUpdated)):
     # concatinate the job title to the description
@@ -141,7 +143,6 @@ print("tf-idf complete! \n")
 # Do the same for the resume...
 print("performing tf-idf for the resume (query)")
 resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
-# vectorizer_resume = CountVectorizer()  # initialize a new CountVectorizer object
 
 # document term matrix for resume
 y = tfidf_vectorizer.transform([resumeCorpus])
