@@ -43,14 +43,14 @@
         <counts>
           <entry key="Python Console" value="12318" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="10587" />
-          <entry key="txt" value="706" />
+          <entry key="py" value="10752" />
+          <entry key="txt" value="776" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="707" />
-          <entry key="Python" value="22905" />
+          <entry key="PLAIN_TEXT" value="777" />
+          <entry key="Python" value="23070" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -99,8 +99,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
+            <state relative-caret-position="276">
+              <caret line="166" column="22" lean-forward="true" selection-start-line="166" selection-start-column="22" selection-end-line="166" selection-end-column="22" />
               <folding>
                 <element signature="e#26#35#0" expanded="true" />
               </folding>
@@ -394,7 +394,21 @@
       <option name="project" value="LOCAL" />
       <updated>1542141832909</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="recaculated tf idf matrix by stripping stopwords from the corpus">
+      <created>1542146099752</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1542146099752</updated>
+    </task>
+    <task id="LOCAL-00018" summary="recaculated tf idf matrix by stripping stopwords from the corpus">
+      <created>1542146109150</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1542146109150</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -491,7 +505,8 @@
     <MESSAGE value="Made a countvectorizer for the resume" />
     <MESSAGE value="removed count vectorizer.&#10;&#10;running cosine similarity" />
     <MESSAGE value="Obtained top 5 documents based on the cosine similarity&#10;create an id 2 word dictionary to obtain the word from the id" />
-    <option name="LAST_COMMIT_MESSAGE" value="Obtained top 5 documents based on the cosine similarity&#10;create an id 2 word dictionary to obtain the word from the id" />
+    <MESSAGE value="recaculated tf idf matrix by stripping stopwords from the corpus" />
+    <option name="LAST_COMMIT_MESSAGE" value="recaculated tf idf matrix by stripping stopwords from the corpus" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -548,8 +563,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
+        <state relative-caret-position="276">
+          <caret line="166" column="22" lean-forward="true" selection-start-line="166" selection-start-column="22" selection-end-line="166" selection-end-column="22" />
           <folding>
             <element signature="e#26#35#0" expanded="true" />
           </folding>
