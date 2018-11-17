@@ -15,7 +15,7 @@ from IndeedAPI import *
 #Initialize the necessary objects
 indeedApi = IndeedAPi()
 
-
+# Section to retrieve the urls and data from the jobs
 job_urls = indeedApi.retrieve_urls("Java developer",11590,10)
 
 #this list holds jobs that may have no content.
@@ -39,12 +39,12 @@ for p in d.paragraphs:
 resumetext = ""  # empty string which should hold the text of the resume
 
 # Iterate through the array removing indices that have length of 0
-for i in range(len(fullText)):
-    try:
-        if len(fullText[i]) == 0:
-            fullText.pop(i)
-    except IndexError:
-        print("Could not pop indice...")
+# for i in range(len(fullText)):
+#     try:
+#         if len(fullText[i]) == 0:
+#             fullText.pop(i)
+#     except IndexError:
+#         print("Could not pop indice...")
 # iterate through the fullText array and strip \n and \t
 for i in range(len(fullText)):
     fullText[i] = re.sub("\s+", " ", fullText[i])  # if there is text remove the extra space and the and the tabs
@@ -155,7 +155,7 @@ similarity = cosine_similarity(x, y).flatten()
 top_5_related_document_indices = similarity.argsort()[:-5:-1]
 
 # This is for all similarity scores from highest to lowest
-all_related_document_indices = similarity.argsort[::-1]
+all_related_document_indices = similarity.argsort()[::-1]
 # top 5 documents with cosine similarity scores are here
 top_5 = {}
 for i in top_5_related_document_indices:

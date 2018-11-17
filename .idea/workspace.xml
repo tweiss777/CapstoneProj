@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KeyWordExtraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/KeyWordExtraction.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,28 +30,28 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="15" />
-          <entry key="txt" value="3" />
+          <entry key="py" value="18" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="15" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="12318" />
+          <entry key="Python Console" value="12728" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="10752" />
-          <entry key="txt" value="776" />
+          <entry key="py" value="12687" />
+          <entry key="txt" value="788" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="777" />
-          <entry key="Python" value="23070" />
+          <entry key="PLAIN_TEXT" value="789" />
+          <entry key="Python" value="25415" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -96,14 +97,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="166" column="22" lean-forward="true" selection-start-line="166" selection-start-column="22" selection-end-line="166" selection-end-column="22" />
+            <state relative-caret-position="-202">
+              <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
               <folding>
                 <element signature="e#26#35#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <marker date="1542492666702" expanded="true" signature="908:1212" ph="..." />
+                <marker date="1542492666702" expanded="true" signature="1224:1228" ph="..." />
+                <marker date="1542492666702" expanded="true" signature="1224:1382" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Headers.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret lean-forward="true" />
             </state>
           </provider>
         </entry>
@@ -142,6 +167,8 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/IndeedAPI.py" />
         <option value="$PROJECT_DIR$/KeyWordExtraction.py" />
+        <option value="$PROJECT_DIR$/Headers.txt" />
+        <option value="$PROJECT_DIR$/test.py" />
       </list>
     </option>
   </component>
@@ -154,7 +181,20 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CapstoneProj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CapstoneProj" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="full.screen.before.presentation.mode" value="true" />
@@ -173,7 +213,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.KeyWordExtraction">
+  <component name="RunManager" selected="Python.test">
     <configuration name="AuthenticJobsApi" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CapstoneProj" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -258,13 +298,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CapstoneProj" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.IndeedAPI" />
       <item itemvalue="Python.AuthenticJobsApi" />
       <item itemvalue="Python.KeyWordExtraction" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.KeyWordExtraction" />
         <item itemvalue="Python.IndeedAPI" />
         <item itemvalue="Python.AuthenticJobsApi" />
@@ -408,7 +471,21 @@
       <option name="project" value="LOCAL" />
       <updated>1542146109150</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="code changes">
+      <created>1542147656277</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1542147656277</updated>
+    </task>
+    <task id="LOCAL-00020" summary="code changes">
+      <created>1542147672148</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1542147672148</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -424,20 +501,20 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978308" weight="0.10748156" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978308" visible="true" weight="0.20810167" />
       <window_info id="Structure" order="1" sideWeight="0.5021692" side_tool="true" weight="0.11643836" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2483731" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.27765727" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29178083" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.27765727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.3275862" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.32739726" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5019857" side_tool="true" weight="0.44043887" />
-      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" order="10" sideWeight="0.4980143" visible="true" weight="0.41369864" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" order="10" sideWeight="0.4980143" weight="0.41369864" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -506,7 +583,8 @@
     <MESSAGE value="removed count vectorizer.&#10;&#10;running cosine similarity" />
     <MESSAGE value="Obtained top 5 documents based on the cosine similarity&#10;create an id 2 word dictionary to obtain the word from the id" />
     <MESSAGE value="recaculated tf idf matrix by stripping stopwords from the corpus" />
-    <option name="LAST_COMMIT_MESSAGE" value="recaculated tf idf matrix by stripping stopwords from the corpus" />
+    <MESSAGE value="code changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="code changes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -561,12 +639,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/IPython/core/interactiveshell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="2461" selection-start-line="2461" selection-end-line="2461" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/IPython/utils/py3compat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="184" selection-start-line="184" selection-end-line="184" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Headers.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="166" column="22" lean-forward="true" selection-start-line="166" selection-start-column="22" selection-end-line="166" selection-end-column="22" />
+        <state relative-caret-position="-202">
+          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
           <folding>
             <element signature="e#26#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1542492666702" expanded="true" signature="908:1212" ph="..." />
+            <marker date="1542492666702" expanded="true" signature="1224:1228" ph="..." />
+            <marker date="1542492666702" expanded="true" signature="1224:1382" ph="..." />
           </folding>
         </state>
       </provider>
