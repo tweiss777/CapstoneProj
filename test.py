@@ -1,7 +1,5 @@
 import re
 
-from docx import Document
-
 
 def gen_paragraph(document):
     # holds the document paragraphs
@@ -42,9 +40,8 @@ def determine_headers(paragraphs):
     for i in range(len(headersArr)):
         headersArr[i] = headersArr[i].rstrip('\n')
 
-
-with open("TalWeissResume.docx", "rb") as file:
-    doc = Document(file)
-    paragraphs = gen_paragraph(doc)
-
-print(paragraphs)
+# with open("TalWeissResume.docx", "rb") as file:
+#     doc = Document(file)
+#     paragraphs = gen_paragraph(doc)
+#
+# print(paragraphs)

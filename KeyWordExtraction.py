@@ -1,15 +1,46 @@
 # Test file that extracts
 
+import re
+
 import nltk
+from docx import Document
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 from IndeedAPI import *
-from test import *
+
 
 #data needs to be exported to json.
 
+
+def gen_paragraph(document):
+    # holds the document paragraphs
+    resume = [line.text for line in document.paragraphs]
+
+    # True/False array
+    isEmptyArr = []
+
+    # Array that will hold the paragraphs
+    paragraphs = []
+
+    section = []
+    # array that will populate the true false array
+    for line in resume:
+        if len(line) == 0 or bool(re.match('^\s+$', line)) or line in '()~><?'';":\/|{},[]@6&*-_.':
+            isEmptyArr.append(True)
+        else:
+            isEmptyArr.append(False)
+
+    for i in range(len(resume)):
+        # print("%s " % resume[i] + "||| % s" % isEmptyArr[i])
+        if isEmptyArr[i] is not True:
+            section += resume[i]
+        else:
+            paragraphs.append(section)
+            section = ""
+    paragraphs.append(section)
+    return paragraphs
 
 #Initialize the necessary objects
 indeedApi = IndeedAPi()
@@ -99,17 +130,18 @@ POSToKeep = ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG",
 punctuation = '~><?'';:\/|{}[]@6&*-_,.'
 # iterate through the part of speech tags and strip out the conjunction and prepositions.
 # keep the verbs, nouns, and adjectives
-for line in resumePOSTags:
+for i, line in enumerate(resumePOSTags):
     for w in line:
         if w[1] not in POSToKeep:
-            line.remove(w)
+            resumePOSTags[i].remove(w)
 
-resumeNoStopWordsUpdated = [w[0] for w in resumePOSTags]
+resumeNoStopWordsUpdated = [[w[0] for w in line] for line in resumePOSTags]
 
 # snippet that strips punctuation from the words in the resume.
-for word in resumeNoStopWordsUpdated:
-    if word[-1] in punctuation:
-        word = word.replace(word[-1], "")
+for line in resumeNoStopWordsUpdated:
+    for word in line:
+        if word[-1] in punctuation:
+            word = word.replace(word[-1], "")
 
 # they layout of this dictionary will be the same as jobsNoStopWords
 # this has certain parts of speech eliminated
@@ -160,25 +192,26 @@ print("tf-idf complete! \n")
 
 # Do the same for the resume...
 print("performing tf-idf for the resume (query)")
-resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
-
+# resumeCorpus = " ".join(word for word in resumeNoStopWordsUpdated)
+resumeCorpus = [" ".join(word for word in section) for section in resumeNoStopWordsUpdated]
 # document term matrix for resume
-y = tfidf_vectorizer.transform([resumeCorpus])
+y = tfidf_vectorizer.transform(resumeCorpus)
 
 # run the cosine similarity
-similarity = cosine_similarity(x, y).flatten()
+similarity = cosine_similarity(x,
+                               y).flatten()  # with paragraphs it returns 10 paragraphs * 34 jobs to make a product of 340 scores
 
 # sort to find the related documents based on highest cosine similarity score
 # this is for the top 5 scores
-top_5_related_document_indices = similarity.argsort()[:-5:-1]
-
-# This is for all similarity scores from highest to lowest
-all_related_document_indices = similarity.argsort()[::-1]
+# top_5_related_document_indices = similarity.argsort()[:-5:-1]
+#
+# # This is for all similarity scores from highest to lowest
+# all_related_document_indices = similarity.argsort()[::-1]
 # top 5 documents with cosine similarity scores are here
-top_5 = {}
-for i in top_5_related_document_indices:
-    top_5[i] = (similarity[i], corpus[i])
-
+# top_5 = {}
+# for i in top_5_related_document_indices:
+#     top_5[i] = (similarity[i], corpus[i])
+#
 # id 2 word dictionary taken from the tf idf vectorizer
 id2word = {}
 for word, id in tfidf_vectorizer.vocabulary_.items():
