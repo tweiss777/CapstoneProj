@@ -1,13 +1,12 @@
 # Test file that extracts
-import re
 
 import nltk
-from docx import Document
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 from IndeedAPI import *
+from test import *
 
 #data needs to be exported to json.
 
@@ -38,6 +37,7 @@ for p in d.paragraphs:
 
 resumetext = ""  # empty string which should hold the text of the resume
 
+paragraphs = gen_paragraph(d)
 # Iterate through the array removing indices that have length of 0
 # for i in range(len(fullText)):
 #     try:
@@ -46,20 +46,36 @@ resumetext = ""  # empty string which should hold the text of the resume
 #     except IndexError:
 #         print("Could not pop indice...")
 # iterate through the fullText array and strip \n and \t
-for i in range(len(fullText)):
-    fullText[i] = re.sub("\s+", " ", fullText[i])  # if there is text remove the extra space and the and the tabs
-    resumetext = resumetext + fullText[i] + " "  # concatinate part of the resume text to the job description
+# for j in range(len(paragraphs)):
+for i in range(len(paragraphs)):
+    if len(paragraphs[i]) < 1:
+        continue
+    else:
+        paragraphs[i] = re.sub("\s+", " ",
+                               paragraphs[i])  # if there is text remove the extra space and the and the tabs
+
 
 # strip the stopwords from the resume
-resumeNoStopWords = [word for word in resumetext.split() if word not in stopwords.words('english')]
+# resumeNoStopWords = [[word for word in resumetext.split() if word not in stopwords.words('english')]]
+resumeNoStopWords = []
+for p in paragraphs:
+    if len(p) < 1:
+        continue
+    else:
+        paragraph = [word for word in p.split() if word not in stopwords.words('english')]
+        resumeNoStopWords.append(paragraph)
+
+
+
 
 # iterate through the words in the resume and remove the terms that are less than 2 and contain any special characters
 for i in range(len(resumeNoStopWords)):
-    try:
-        if len(resumeNoStopWords[i]) < 2 and resumeNoStopWords[i][0] in '()~><?'';":\/|{},[]@6&*-_':
-            resumeNoStopWords.pop(i)
-    except IndexError:
-        print("Could not pop indice...")
+    for j in range(len(resumeNoStopWords[i])):
+        try:
+            if len(resumeNoStopWords[i][j]) < 2 and resumeNoStopWords[i][j][0] in '()~><?'';":\/|{},[]@6&*-_':
+                resumeNoStopWords[i].pop(j)
+        except IndexError:
+            print("Could not pop indice...")
 
 # iterate through json_data job title and description and strip the stopwords from the description
 jobsNoStopWords = {}  # job_id: {title: "string", descriptionNoStopwords: []
@@ -76,15 +92,17 @@ for i in range(len(json_data)):
                                          w not in stopwords.words('english')]
 
 # retrieve parts of speech from each term in the resume, keeping only nouns verbs and adjectives
-resumePOSTags = nltk.pos_tag(resumeNoStopWords)
+# resumePOSTags = nltk.pos_tag(resumeNoStopWords)
+resumePOSTags = [nltk.pos_tag(section) for section in resumeNoStopWords]
 POSToKeep = ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN", "VBP",
              "VBZ"]  # These are the nouns, verbs, and adjectives we want to keep
 punctuation = '~><?'';:\/|{}[]@6&*-_,.'
 # iterate through the part of speech tags and strip out the conjunction and prepositions.
 # keep the verbs, nouns, and adjectives
-for w in resumePOSTags:
-    if w[1] not in POSToKeep:
-        resumePOSTags.remove(w)
+for line in resumePOSTags:
+    for w in line:
+        if w[1] not in POSToKeep:
+            line.remove(w)
 
 resumeNoStopWordsUpdated = [w[0] for w in resumePOSTags]
 
