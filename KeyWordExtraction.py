@@ -143,7 +143,7 @@ for line in resumeNoStopWordsUpdated:
         if word[-1] in punctuation:
             word = word.replace(word[-1], "")
 
-# they layout of this dictionary will be the same as jobsNoStopWords
+# they layout of this dictionary will be the same as jobsNoStopWords8444
 # this has certain parts of speech eliminated
 jobsNoStopWordsUpdated = {}
 
