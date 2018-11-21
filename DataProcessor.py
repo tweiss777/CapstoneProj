@@ -2,8 +2,12 @@
 import re
 
 import nltk
+import numpy as np
 from docx import Document
+from nltk import word_tokenize
 from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 from IndeedAPI import *
 
@@ -107,7 +111,9 @@ class DataProcessor:
                 except IndexError:
                     print("Could not pop indice...")
             # retrieve parts of speech from each term in the resume, keeping only nouns verbs and adjectives
-            resumePOSTags = nltk.pos_tag(resumeNoStopWords)
+            resumeNoStopWords = " ".join(w for w in resumeNoStopWords if len(w) > 0)
+
+            resumePOSTags = nltk.pos_tag(word_tokenize(resumeNoStopWords))
             for w in resumePOSTags:
                 if w[1] not in POSToKeep:
                     resumePOSTags.remove(w)
@@ -143,7 +149,7 @@ class DataProcessor:
                     except IndexError:
                         print("Could not pop indice...")
 
-            resumePOSTags = [nltk.pos_tag(section) for section in resumeNoStopWords]
+            resumePOSTags = [nltk.pos_tag(word_tokenize(" ".join(w for w in section))) for section in resumeNoStopWords]
             for i, line in enumerate(resumePOSTags):
                 for w in line:
                     if w[1] not in POSToKeep:
@@ -198,3 +204,41 @@ class DataProcessor:
                     jobsNoStopWordsUpdated[i]["description"][j] = jobsNoStopWordsUpdated[i]["description"][j].replace(
                         jobsNoStopWordsUpdated[i]["description"][j][-1], "")
         return jobsNoStopWordsUpdated
+
+    # Function to determine the tf_idf
+    # Training set = job descriptions
+    # Test set = resume(s) or set of resumes
+    # Returns tuple consisting of x,y and vocab
+    def tf_idf(self, training_set, test_set):
+        tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False, stop_words=stopwords.words('english'))
+        corpus = []
+        for i in range(len(training_set)):
+            corpus.append(training_set[i]["title"] + " " + " ".join(word for word in training_set[i]["description"]))
+
+        # create bag of words and transform corpus into a document term frequency matrix
+        x = tf_idf_vectorizer.fit_transform(corpus)
+        arrType = np.asarray(test_set)
+        if len(arrType.shape) == 1:
+
+            # transform the resume into a term frequency matrix
+            resumeCorpus = " ".join(word for word in test_set)
+            y = tf_idf_vectorizer.transform([resumeCorpus])
+
+        # This portion of code is untested
+        elif len(arrType.shape) == 2:
+            resumeCorpus = [" ".join(word for word in section) for section in test_set]
+            y = tf_idf_vectorizer.transform(resumeCorpus)
+
+        else:
+            return Exception("Either a 1 or 2 dimensional array must be passed")
+
+        # get the vocabulary
+        bagOfWords = tf_idf_vectorizer.vocabulary_
+
+        # return tuple
+        return (x, y, bagOfWords)
+
+    # Function to get the cosine similarity
+    # Takes in two document term frequency matrixes returned from the tf-idf function
+    def get_cosine_similarity(self, x, y):
+        return cosine_similarity(x, y).flatten()
