@@ -242,3 +242,11 @@ class DataProcessor:
     # Takes in two document term frequency matrixes returned from the tf-idf function
     def get_cosine_similarity(self, x, y):
         return cosine_similarity(x, y).flatten()
+
+    # Function that gets the bigrams for the passed in dataset
+    def get_bigrams(self, dataset, occurences):
+        bigrams = list(nltk.bigrams(dataset))
+        for bi in bigrams:
+            if bigrams.count(bi) >= occurences:
+                dataset.append(bi[0] + " " + bi[1])
+        return dataset

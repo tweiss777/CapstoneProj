@@ -13,6 +13,12 @@ def main():
     resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)  # Untested
 
     processed_jobs = dp.process_jobs(jobs)
+    processed_jobs_noBigrams = processed_jobs
+    # Make a method that will retrieve the bigrams for the jobs
+    processed_jobs_no_bigrams = processed_jobs
+    for i in range(len(processed_jobs)):
+        processed_jobs[i]["description"] = dp.get_bigrams(processed_jobs[i]["description"], 3)
+
 
     x, y, bagOfWords = dp.tf_idf(processed_jobs, resumeStrUpdated)
 
