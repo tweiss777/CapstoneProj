@@ -17,12 +17,14 @@ def main():
     # Make a method that will retrieve the bigrams for the jobs
     processed_jobs_no_bigrams = processed_jobs
     for i in range(len(processed_jobs)):
-        processed_jobs[i]["description"] = dp.get_bigrams(processed_jobs[i]["description"], 3)
+        processed_jobs[i]["description"] = dp.get_bigrams(processed_jobs[i]["description"], 2)
 
 
     x, y, bagOfWords = dp.tf_idf(processed_jobs, resumeStrUpdated)
 
     similarity_score = dp.get_cosine_similarity(x, y)
-
+    # print(similarity_score)
+    for w in processed_jobs[0]["description"]:
+        print(w)
 
 main()

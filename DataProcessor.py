@@ -243,10 +243,16 @@ class DataProcessor:
     def get_cosine_similarity(self, x, y):
         return cosine_similarity(x, y).flatten()
 
-    # Function that gets the bigrams for the passed in dataset
+    # Function that gets the bigrams for the document.
     def get_bigrams(self, dataset, occurences):
         bigrams = list(nltk.bigrams(dataset))
         for bi in bigrams:
+            bigramstr = bi[0] + " " + bi[1]
             if bigrams.count(bi) >= occurences:
-                dataset.append(bi[0] + " " + bi[1])
+                if bigramstr not in dataset:
+                    dataset.append(bigramstr)
         return dataset
+
+    #This gets the bigrams for the entire collection of documents
+    def get_all_bigrams(self,dataset,occurences):
+        pass
