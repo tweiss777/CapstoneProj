@@ -255,4 +255,20 @@ class DataProcessor:
 
     #This gets the bigrams for the entire collection of documents
     def get_all_bigrams(self,dataset,occurences):
-        pass
+        # list to hold all the bigrams from the entire corpus.
+        all_bigrams = []
+        for i in range(len(dataset)):
+            bigrams = list(nltk.bigrams(dataset[i]["description"]))
+
+            for bi in bigrams:
+                bigramstr = bi[0] + " " + bi[1]
+                all_bigrams.append(bigramstr)
+
+        updated_bigrams = [bi for bi in all_bigrams if all_bigrams.count(bi) >= occurences]
+        for i in range(len(dataset)):
+            bigrams = list(nltk.bigrams(dataset[i]["description"]))
+            for bi in bigrams:
+                bigramstr = bi[0] + " " + bi[1]
+                if bigramstr in updated_bigrams:
+                    dataset[i]["description"].append(bigramstr)
+        return dataset
