@@ -44,7 +44,7 @@ class DataProcessor:
 
     # input: job title as a string, location as int, page limit as int
     # Returns a dictionary of {job_id: {title: "string", description: "string", keywords: ["String"]}}
-    def get_jobs(self, title, location, page_limit):
+    def get_jobs(self, title, location, page_limit,separate_paragraphs):
         indeedApi = IndeedAPi()
         job_urls = indeedApi.retrieve_urls(title, location, page_limit)
 
@@ -54,9 +54,13 @@ class DataProcessor:
         # filtered jobs are jobs in list that have content Note: this holds the markup (html) of the job
         filtered_jobs = indeedApi.filterJobs(unfiltered_jobs)
 
-        # takes the filtered jobs and creates a dictionary that holds all the jobs
-        # key = {job_id: {title: "string", description: "string", keywords: ["String"]}}
-        json_data = indeedApi.generateJson(filtered_jobs)
+        if not separate_paragraphs: #generate data without paragraph separation
+            # takes the filtered jobs and creates a dictionary that holds all the jobs
+            # key = {job_id: {title: "string", description: "string", keywords: ["String"]}}
+            json_data = indeedApi.generateJson(filtered_jobs)
+        else:
+            #generate the data using paragraph separation
+            json_data = indeedApi.generateJsonParagraphs(filtered_jobs)
         return json_data
 
     # takes in resume and bool to indicate whether to return list of paragraphs or the entire resume as a string
@@ -209,7 +213,7 @@ class DataProcessor:
     # Training set = job descriptions
     # Test set = resume(s) or set of resumes
     # Returns tuple consisting of x,y and vocab
-    def tf_idf(self, training_set, test_set):
+    def tf_idf(self, training_set, test_set,paragraphs):
         tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False, stop_words=stopwords.words('english'))
         corpus = []
         for i in range(len(training_set)):
@@ -217,15 +221,15 @@ class DataProcessor:
 
         # create bag of words and transform corpus into a document term frequency matrix
         x = tf_idf_vectorizer.fit_transform(corpus)
-        arrType = np.asarray(test_set)
-        if len(arrType.shape) == 1:
+        # arrType = np.asarray(test_set)
+        if not paragraphs:
 
             # transform the resume into a term frequency matrix
             resumeCorpus = " ".join(word for word in test_set)
             y = tf_idf_vectorizer.transform([resumeCorpus])
 
         # This portion of code is untested
-        elif len(arrType.shape) == 2:
+        elif paragraphs:
             resumeCorpus = [" ".join(word for word in section) for section in test_set]
             y = tf_idf_vectorizer.transform(resumeCorpus)
 
@@ -272,3 +276,8 @@ class DataProcessor:
                 if bigramstr in updated_bigrams:
                     dataset[i]["description"].append(bigramstr)
         return dataset
+
+    # This is not working for some reason. Remove soon
+    # def get_top_jobs(self,similarity_scores,top_n):
+    #     top_n_scores = similarity_scores.argsort()[:-top_n:-1]
+    #     return top_n_scores

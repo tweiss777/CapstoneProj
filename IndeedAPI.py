@@ -93,6 +93,22 @@ class IndeedAPi:
 
             # return the json data
         return json_data
+    def generateJsonParagraphs(self,jobs):
+        #assign id to job
+        job_id = 0
+        json_data = {}
+
+        for job in jobs:
+
+            # holds the job_id as a key :
+            # {title: str, description: list of paragraphs}
+            json_data[job_id] = {}
+            json_data[job_id]["title"] = job[0]
+            html = job[0].find_all(['p','ul'])
+            json_data[job_id]["description"] = [tag.get_text() for tag in html]
+            job_id+=1
+        return json_data
+
 
 
 
