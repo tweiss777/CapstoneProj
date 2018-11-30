@@ -1,9 +1,11 @@
-import json
-from bs4 import BeautifulSoup
-import urllib3
 import urllib.request
+
 import certifi
+import urllib3
+from bs4 import BeautifulSoup
+
 from RakeFunctions import *
+
 
 # Class for indeed api
 class IndeedAPi:
@@ -104,7 +106,7 @@ class IndeedAPi:
             # {title: str, description: list of paragraphs}
             json_data[job_id] = {}
             json_data[job_id]["title"] = job[0]
-            html = job[0].find_all(['p','ul'])
+            html = job[1].find_all(['p', 'ul'])
             json_data[job_id]["description"] = [tag.get_text() for tag in html]
             job_id+=1
         return json_data

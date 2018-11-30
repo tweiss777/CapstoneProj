@@ -2,7 +2,6 @@
 import re
 
 import nltk
-import numpy as np
 from docx import Document
 from nltk import word_tokenize
 from nltk.corpus import stopwords
@@ -276,6 +275,30 @@ class DataProcessor:
                 if bigramstr in updated_bigrams:
                     dataset[i]["description"].append(bigramstr)
         return dataset
+
+    def get_all_bigrams_paragraphs(self, dataset, occurrences):
+        all_bigrams = []
+
+        # Iterate through the dictionary
+        for i in range(len(dataset)):
+            # ite1ate through the paragraphs within the jd
+            jd = dataset[i]["description"]
+            for j in range(len(jd)):
+                bigrams = list(nltk.bigrams(word_tokenize(jd[j])))
+                all_bigrams = [bi[0] + " " + bi[1] for bi in bigrams]
+
+        updated_bigrams = [bi for bi in all_bigrams if all_bigrams.count(bi) >= occurrences]
+
+        for i in range(len(dataset)):
+            jd = dataset["description"][i]
+            for j in range(jd):
+                bigrams = list(nltk.bigrams(word_tokenize(jd[j])))
+                for bi in bigrams:
+                    bigramstr = bi[0] + " " + bi[1]
+                    if bigramstr in updated_bigrams:
+                        dataset[i]["description"][j].append(bigramstr)
+            return dataset
+
 
     # This is not working for some reason. Remove soon
     # def get_top_jobs(self,similarity_scores,top_n):
