@@ -62,6 +62,7 @@ class DataProcessor:
             json_data = indeedApi.generateJsonParagraphs(filtered_jobs)
         return json_data
 
+
     # takes in resume and bool to indicate whether to return list of paragraphs or the entire resume as a string
     def process_resume(self, resume, split_paragraphs):
         file = open(resume, 'rb')
@@ -285,17 +286,26 @@ class DataProcessor:
             jd = dataset[i]["description"]
             for j in range(len(jd)):
                 bigrams = list(nltk.bigrams(word_tokenize(jd[j])))
-                all_bigrams = [bi[0] + " " + bi[1] for bi in bigrams]
-
+                for bi in bigrams:
+                    bigramstr = bi[0] + " " + bi[1]
+                    all_bigrams.append(bigramstr)
         updated_bigrams = [bi for bi in all_bigrams if all_bigrams.count(bi) >= occurrences]
 
         for i in range(len(dataset)):
-            jd = dataset["description"][i]
-            for j in range(jd):
+            for j in range(len(dataset[i]["description"])):
+                dataset[i]["description"][j] = word_tokenize(dataset[i]["description"])
+        print("adding bigrams\n")
+
+
+        for i in range(len(dataset)):
+            jd = dataset[i]["description"]
+            for j in range(len(jd)):
                 bigrams = list(nltk.bigrams(word_tokenize(jd[j])))
+                dataset[i]["description"][j] = word_tokenize(dataset[i]["description"][j])
                 for bi in bigrams:
                     bigramstr = bi[0] + " " + bi[1]
                     if bigramstr in updated_bigrams:
+                        print("appending %s" % bigramstr)
                         dataset[i]["description"][j].append(bigramstr)
             return dataset
 

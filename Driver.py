@@ -6,8 +6,12 @@ def main():
 
     # Get the jobs from indeed.com
     jobs = dp.get_jobs("Java Developer", 11590, 10,separate_paragraphs=False)
+
+    # These jobs are paragraph divided
     jobs2 = dp.get_jobs("Java Developer", 11590,10,separate_paragraphs=True)
 
+    # get the bigrams for the paragraph segregated jobs
+    jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
     # load the resume up as a doc or docx file
     resumeStr = dp.process_resume("TalWeissResume.docx", False)
     resumeList = dp.process_resume("TalWeissResume.docx", True)
@@ -16,7 +20,7 @@ def main():
     resumeStrUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeStr)
     resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)  # Untested
 
-    # pre process the jobs
+    # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
     processed_jobs_noBigrams = processed_jobs
 
