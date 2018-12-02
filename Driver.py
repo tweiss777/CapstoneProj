@@ -9,11 +9,16 @@ def main():
 
     # These jobs are paragraph divided
     jobs2 = dp.get_jobs("Java Developer", 11590,10,separate_paragraphs=True)
-
     # get the bigrams for the paragraph segregated jobs
     jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
+
+    # strip certain parts of speech
+    jobs2_bigrams_processed = dp.process_jobs_paragraphs(jobs2_bigrams)
+
     # load the resume up as a doc or docx file
     resumeStr = dp.process_resume("TalWeissResume.docx", False)
+
+    # This segregates the paragraphs in the resume
     resumeList = dp.process_resume("TalWeissResume.docx", True)
 
     # pre process the resume

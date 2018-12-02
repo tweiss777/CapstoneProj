@@ -209,6 +209,31 @@ class DataProcessor:
                         jobsNoStopWordsUpdated[i]["description"][j][-1], "")
         return jobsNoStopWordsUpdated
 
+    # Method to process the paragraph separated jobs
+    def process_jobs_paragraphs(self, jobs):
+        POSToKeep = ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN", "VBP",
+                     "VBZ"]  # These are the nouns, verbs, and adjectives we want to keep
+        punctuation = list('~><?'';:\/|{}[]@&*-_,.)(')
+        # Process parts of speech
+        for i in range(len(jobs)):
+            if len(jobs[i]["description"]) < 1:
+                continue
+            for j in range(len(jobs[i]["description"])):
+                paragraphPOS = nltk.pos_tag(jobs[i]["description"][j])
+                for word in paragraphPOS:
+                    if word[1] not in POSToKeep:
+                        print("found %s" % word[1])
+                        paragraphPOS.remove(word)
+            jobs[i]["description"][j] = [word[0] for word in paragraphPOS if
+                                         len(word[0]) > 1 and word[0] not in punctuation]
+
+        # Remove stopwords
+        for i in range(len(jobs)):
+            for j in range(len(jobs[i]["description"])):
+                jobs[i]["description"][j] = [word for word in jobs[i]["description"][j] if
+                                             word not in stopwords.words('english')]
+
+        return jobs
     # Function to determine the tf_idf
     # Training set = job descriptions
     # Test set = resume(s) or set of resumes
@@ -277,6 +302,8 @@ class DataProcessor:
                     dataset[i]["description"].append(bigramstr)
         return dataset
 
+    # Generates bigrams for jobs that are separated into paragraphs
+    # Note: this takes in the data set where the job description is passed as a list of strings
     def get_all_bigrams_paragraphs(self, dataset, occurrences):
         all_bigrams = []
 
@@ -293,20 +320,22 @@ class DataProcessor:
 
         for i in range(len(dataset)):
             for j in range(len(dataset[i]["description"])):
-                dataset[i]["description"][j] = word_tokenize(dataset[i]["description"])
+                dataset[i]["description"][j] = word_tokenize(dataset[i]["description"][j])
+
         print("adding bigrams\n")
 
 
         for i in range(len(dataset)):
             jd = dataset[i]["description"]
             for j in range(len(jd)):
-                bigrams = list(nltk.bigrams(word_tokenize(jd[j])))
-                dataset[i]["description"][j] = word_tokenize(dataset[i]["description"][j])
+                bigrams = list(nltk.bigrams(jd[j]))
                 for bi in bigrams:
                     bigramstr = bi[0] + " " + bi[1]
                     if bigramstr in updated_bigrams:
                         print("appending %s" % bigramstr)
                         dataset[i]["description"][j].append(bigramstr)
+
+            # Returns the dataset where the description is turned into a list of lists of strings
             return dataset
 
 
