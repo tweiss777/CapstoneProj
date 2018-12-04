@@ -66,5 +66,6 @@ def main():
         for paragraph_num, matrix in paragraph_scores.items():
             similarity_scores[doc_id][paragraph_num] = dp.get_cosine_similarity(matrix[0], matrix[1])
 
+    # store 3 closes paragraphs from job description for each paragraph in your resume
 
 main()
