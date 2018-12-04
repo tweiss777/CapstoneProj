@@ -5,7 +5,7 @@ def main():
     dp = DataProcessor()
 
     # Get the jobs from indeed.com
-    jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
+    jobs, jobs2 = dp.get_jobs("iOS Developer", 11590, 10)
 
 
     jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
@@ -56,6 +56,15 @@ def main():
         top_5_jobs_paragraphs[i]["title"] = jobs2_bigrams_processed[i]["title"]
         top_5_jobs_paragraphs[i]["description"] = jobs2_bigrams_processed[i]["description"]
 
+    # tf idf scores for each paragraph in the resume
     tf_idf_for_top_5_jobs_paragraphs = dp.tf_idf2(top_5_jobs_paragraphs, resumeListUpdated)
-    print(len(tf_idf_for_top_5_jobs_paragraphs))
+
+    # holds the similarity score between each paragraph in the resume with each paragraph in the top 5 jobs
+    similarity_scores = {}
+    for doc_id, paragraph_scores in tf_idf_for_top_5_jobs_paragraphs.items():
+        similarity_scores[doc_id] = {}
+        for paragraph_num, matrix in paragraph_scores.items():
+            similarity_scores[doc_id][paragraph_num] = dp.get_cosine_similarity(matrix[0], matrix[1])
+
+
 main()

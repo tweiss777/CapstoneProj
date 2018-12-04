@@ -272,7 +272,7 @@ class DataProcessor:
                 corpus.append(paragraphstr)
 
             # counter for resume paragraph number starting at 1
-            paragraph_num = 0
+            resume_paragraph_num = 0
 
             # Create a nested dictionary where the key is the paragraph
             total_scores[job_num[0]] = {}
@@ -282,11 +282,12 @@ class DataProcessor:
                 corpusParagraph = " ".join(word for word in paragraph)
                 tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False,
                                                     stop_words=stopwords.words('english'))
-
+                # x is the job set
+                # y is the resume set
                 x = tf_idf_vectorizer.fit_transform(corpus)
                 y = tf_idf_vectorizer.transform([corpusParagraph])
-                total_scores[job_num[0]][paragraph_num] = (x, y)
-                paragraph_num += 1
+                total_scores[job_num[0]][resume_paragraph_num] = (x, y)
+                resume_paragraph_num += 1
 
         return total_scores
 

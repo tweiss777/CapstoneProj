@@ -107,7 +107,18 @@ class IndeedAPi:
             json_data[job_id] = {}
             json_data[job_id]["title"] = job[0]
             html = job[1].find_all(['p', 'ul'])
-            json_data[job_id]["description"] = [tag.get_text() for tag in html]
+
+            if len(html) > 0:
+                json_data[job_id]["description"] = [tag.get_text() for tag in html]
+            else:
+                html = job[1].contents[1:]
+                paragraphs = []
+                for tag in html:
+                    try:
+                        paragraphs.append(tag.get_text())
+                    except:
+                        paragraphs.append(tag)
+                json_data[job_id]["description"] = paragraphs
             job_id+=1
         return json_data
 
