@@ -43,7 +43,7 @@ class DataProcessor:
 
     # input: job title as a string, location as int, page limit as int
     # Returns a dictionary of {job_id: {title: "string", description: "string", keywords: ["String"]}}
-    def get_jobs(self, title, location, page_limit,separate_paragraphs):
+    def get_jobs(self, title, location, page_limit):
         indeedApi = IndeedAPi()
         job_urls = indeedApi.retrieve_urls(title, location, page_limit)
 
@@ -53,14 +53,13 @@ class DataProcessor:
         # filtered jobs are jobs in list that have content Note: this holds the markup (html) of the job
         filtered_jobs = indeedApi.filterJobs(unfiltered_jobs)
 
-        if not separate_paragraphs: #generate data without paragraph separation
-            # takes the filtered jobs and creates a dictionary that holds all the jobs
-            # key = {job_id: {title: "string", description: "string", keywords: ["String"]}}
-            json_data = indeedApi.generateJson(filtered_jobs)
-        else:
-            #generate the data using paragraph separation
-            json_data = indeedApi.generateJsonParagraphs(filtered_jobs)
-        return json_data
+        # takes the filtered jobs and creates a dictionary that holds all the jobs
+        # key = {job_id: {title: "string", description: "string", keywords: ["String"]}}
+        json_data = indeedApi.generateJson(filtered_jobs)
+
+        # generate the data using paragraph separation
+        json_data_wparagraphs = indeedApi.generateJsonParagraphs(filtered_jobs)
+        return json_data, json_data_wparagraphs
 
 
     # takes in resume and bool to indicate whether to return list of paragraphs or the entire resume as a string
@@ -238,7 +237,7 @@ class DataProcessor:
     # Training set = job descriptions
     # Test set = resume(s) or set of resumes
     # Returns tuple consisting of x,y and vocab
-    def tf_idf(self, training_set, test_set,paragraphs):
+    def tf_idf(self, training_set, test_set):
         tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False, stop_words=stopwords.words('english'))
         corpus = []
         for i in range(len(training_set)):
@@ -246,26 +245,67 @@ class DataProcessor:
 
         # create bag of words and transform corpus into a document term frequency matrix
         x = tf_idf_vectorizer.fit_transform(corpus)
-        # arrType = np.asarray(test_set)
-        if not paragraphs:
 
-            # transform the resume into a term frequency matrix
-            resumeCorpus = " ".join(word for word in test_set)
-            y = tf_idf_vectorizer.transform([resumeCorpus])
+        # transform the resume into a term frequency matrix
+        resumeCorpus = " ".join(word for word in test_set)
+        y = tf_idf_vectorizer.transform([resumeCorpus])
 
         # This portion of code is untested
-        elif paragraphs:
-            resumeCorpus = [" ".join(word for word in section) for section in test_set]
-            y = tf_idf_vectorizer.transform(resumeCorpus)
-
-        else:
-            return Exception("Either a 1 or 2 dimensional array must be passed")
 
         # get the vocabulary
         bagOfWords = tf_idf_vectorizer.vocabulary_
 
         # return tuple
         return (x, y, bagOfWords)
+
+    # Tf-idf helper function for paragraphs in the resume to paragraphs in the job descriptions
+    def tf_idf2(self, jobs, resume):
+        # scores are sorted as {job#: {resume paragraph#: score}}
+        total_scores = {}
+        for job_num in jobs.items():
+            singlejob = job_num[1]
+            corpus = []
+
+            # add paragraphs of the particular job to the corpus
+            for paragraph in singlejob["description"]:
+                paragraphstr = " ".join(word for word in paragraph)
+                corpus.append(paragraphstr)
+
+            # counter for resume paragraph number starting at 1
+            paragraph_num = 0
+
+            # Create a nested dictionary where the key is the paragraph
+            total_scores[job_num[0]] = {}
+            # compute the score for each paragraph in the resume
+            print(corpus)
+            for paragraph in resume:
+                corpusParagraph = " ".join(word for word in paragraph)
+                tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False,
+                                                    stop_words=stopwords.words('english'))
+
+                x = tf_idf_vectorizer.fit_transform(corpus)
+                y = tf_idf_vectorizer.transform([corpusParagraph])
+                total_scores[job_num[0]][paragraph_num] = (x, y)
+                paragraph_num += 1
+
+        return total_scores
+
+        # for i in range(len(jobs)):
+        #     singlejob = jobs[i]
+        #     corpus = []
+        #
+        #     #add paragraphs of the particular job to the corpus
+        #     for paragraph in singlejob["description"]:
+        #         paragraphstr = " ".join(word for word in paragraph)
+        #         corpus.append(paragraphstr)
+        #
+        #     #compute the score for each paragraph in the resume
+        #     for paragraph in resume:
+        #         corpusParagraph = " ".join(word for word in paragraph)
+        #         tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False,
+        #                                             stop_words=stopwords.words('english'))
+        #         x = tf_idf_vectorizer.fit_transform(corpus)
+        #         y = tf_idf_vectorizer.transform(corpusParagraph)
 
     # Function to get the cosine similarity
     # Takes in two document term frequency matrixes returned from the tf-idf function
@@ -338,8 +378,3 @@ class DataProcessor:
             # Returns the dataset where the description is turned into a list of lists of strings
             return dataset
 
-
-    # This is not working for some reason. Remove soon
-    # def get_top_jobs(self,similarity_scores,top_n):
-    #     top_n_scores = similarity_scores.argsort()[:-top_n:-1]
-    #     return top_n_scores

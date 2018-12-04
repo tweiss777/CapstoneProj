@@ -89,7 +89,7 @@ class IndeedAPi:
             # store the markup in the markup variable
             markup = job[1]
             json_data[job_id]["description"] = markup.get_text()
-            json_data[job_id]["keywords"] = r.process_rake(json_data[job_id]["description"])
+            # json_data[job_id]["keywords"] = r.process_rake(json_data[job_id]["description"])
             #increment the job_id count by 1
             job_id +=1
 

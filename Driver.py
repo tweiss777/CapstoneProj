@@ -5,11 +5,9 @@ def main():
     dp = DataProcessor()
 
     # Get the jobs from indeed.com
-    jobs = dp.get_jobs("Java Developer", 11590, 10,separate_paragraphs=False)
+    jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
 
-    # These jobs are paragraph divided
-    jobs2 = dp.get_jobs("Java Developer", 11590,10,separate_paragraphs=True)
-    # get the bigrams for the paragraph segregated jobs
+
     jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
 
     # strip certain parts of speech
@@ -40,14 +38,9 @@ def main():
     # x = the jobs
     # y = the resume
     # process tf-idf for the whole resume
-    x1, y1, bagOfWords = dp.tf_idf(processed_jobs, resumeStrUpdated,paragraphs=False)
-
-    #process tf-idf for the paragraphs in the resume
-    x2,y2, bagOfWords = dp.tf_idf(processed_jobs_all_bigrams,resumeListUpdated,paragraphs=True)
+    x1, y1, bagOfWords = dp.tf_idf(processed_jobs, resumeStrUpdated)
 
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
-
-    similarity_score_paragraphs = dp.get_cosine_similarity(x2,y2)
 
     # retrieve the top 5 job indices
     top_5_indices = similarity_score_whole.argsort()[:-5:-1]
@@ -56,7 +49,13 @@ def main():
     for i in top_5_indices:
         top_5_jobs[i] = (similarity_score_whole[i],jobs[i]["title"] + " " + jobs[i]["description"])
 
+    # Take the top 5 scores and use them to get the relevant paragraphs.
+    top_5_jobs_paragraphs = {}
+    for i in top_5_indices:
+        top_5_jobs_paragraphs[i] = {}
+        top_5_jobs_paragraphs[i]["title"] = jobs2_bigrams_processed[i]["title"]
+        top_5_jobs_paragraphs[i]["description"] = jobs2_bigrams_processed[i]["description"]
 
-
-
+    tf_idf_for_top_5_jobs_paragraphs = dp.tf_idf2(top_5_jobs_paragraphs, resumeListUpdated)
+    print(len(tf_idf_for_top_5_jobs_paragraphs))
 main()
