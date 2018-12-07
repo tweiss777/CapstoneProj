@@ -5,7 +5,7 @@ def main():
     dp = DataProcessor()
 
     # Get the jobs from indeed.com
-    jobs, jobs2 = dp.get_jobs("iOS Developer", 11590, 10)
+    jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
 
 
     jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
@@ -47,7 +47,7 @@ def main():
 
     top_5_jobs = {}
     for i in top_5_indices:
-        top_5_jobs[i] = (similarity_score_whole[i],jobs[i]["title"] + " " + jobs[i]["description"])
+        top_5_jobs[i] = (similarity_score_whole[i], jobs[i]["title"] + " " + jobs[i]["description"])
 
     # Take the top 5 scores and use them to get the relevant paragraphs.
     top_5_jobs_paragraphs = {}
@@ -67,5 +67,6 @@ def main():
             similarity_scores[doc_id][paragraph_num] = dp.get_cosine_similarity(matrix[0], matrix[1])
 
     # store 3 closes paragraphs from job description for each paragraph in your resume
+
 
 main()
