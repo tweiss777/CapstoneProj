@@ -18,7 +18,7 @@ def main():
 
     # This segregates the paragraphs in the resume
     resumeList = dp.process_resume("TalWeissResume.docx", True)
-
+    resumeList = [paragraph for paragraph in resumeList if len(paragraph) > 0]
     # pre process the resume
     resumeStrUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeStr)
     resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)  # Untested
@@ -43,7 +43,7 @@ def main():
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
 
     # retrieve the top 5 job indices
-    top_5_indices = similarity_score_whole.argsort()[:-5:-1]
+    top_5_indices = similarity_score_whole.argsort()[:-6:-1]
 
     top_5_jobs = {}
     for i in top_5_indices:
@@ -67,6 +67,11 @@ def main():
             similarity_scores[doc_id][paragraph_num] = dp.get_cosine_similarity(matrix[0], matrix[1])
 
     # store 3 closes paragraphs from job description for each paragraph in your resume
+    top_3_paragraphs_per_job = {}
+    for doc_id, paragraph_scores in similarity_scores.items():
+        top_3_paragraphs_per_job[doc_id] = {}
+        for paragraph_num, scores in paragraph_scores.items():
+            top_3_paragraphs_per_job[doc_id][paragraph_num] = scores.argsort()[:-4:-1]
 
 
 main()

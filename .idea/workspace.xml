@@ -16,17 +16,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-341">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="155">
+              <caret line="261" column="8" selection-start-line="261" selection-start-column="8" selection-end-line="261" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -34,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="699">
-              <caret line="68" column="86" selection-start-line="68" selection-start-column="86" selection-end-line="68" selection-end-column="86" />
+            <state relative-caret-position="811">
+              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
             </state>
           </provider>
         </entry>
@@ -63,6 +54,7 @@
       <find>resumenostop</find>
       <find>is</find>
       <find>process_jobs_</find>
+      <find>args</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -458,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543898256323</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Implemented cosine similarity for document and paragraph number.&#10;&#10;Need to store closest three paragraphs from jd for each resume paragraph">
+      <created>1544204526339</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1544204526339</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView">
@@ -474,7 +473,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4272" weight="0.16965227" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4272" visible="true" weight="0.16965227" />
       <window_info id="Structure" order="1" sideWeight="0.5728" side_tool="true" weight="0.16965227" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -487,7 +486,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.32719395" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50277996" side_tool="true" weight="0.3657534" />
-      <window_info anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" weight="0.36515912" />
+      <window_info active="true" anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.36511377" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -572,7 +571,8 @@
     <MESSAGE value="DataProcessor file almost implemented&#10;Created a Driver file to test the DataProcessor class" />
     <MESSAGE value="Implemented method to extract bigrams for the entire corpus." />
     <MESSAGE value="testing cosine similarity" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing cosine similarity" />
+    <MESSAGE value="Implemented cosine similarity for document and paragraph number.&#10;&#10;Need to store closest three paragraphs from jd for each resume paragraph" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented cosine similarity for document and paragraph number.&#10;&#10;Need to store closest three paragraphs from jd for each resume paragraph" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -583,11 +583,6 @@
           <url>file://$PROJECT_DIR$/KeyWordExtraction.py</url>
           <line>193</line>
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/IndeedAPI.py</url>
-          <line>43</line>
-          <option name="timeStamp" value="113" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -653,16 +648,6 @@
     </entry>
     <entry file="file://C:/Program Files/Python36/Lib/site-packages/nltk/tag/__init__.py" />
     <entry file="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/-1120166012/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="204" column="6" selection-start-line="204" selection-start-column="6" selection-end-line="204" selection-end-column="6" />
-          <folding>
-            <element signature="e#27#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
@@ -692,24 +677,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+    <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="16">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
+    <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-341">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        <state relative-caret-position="572">
+          <caret line="207" column="53" selection-start-line="207" selection-start-column="53" selection-end-line="207" selection-end-column="53" />
+          <folding>
+            <element signature="e#27#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="261" column="8" selection-start-line="261" selection-start-column="8" selection-end-line="261" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="68" column="86" selection-start-line="68" selection-start-column="86" selection-end-line="68" selection-end-column="86" />
+        <state relative-caret-position="811">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
         </state>
       </provider>
     </entry>
