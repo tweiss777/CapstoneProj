@@ -1,5 +1,6 @@
 # Import statements
 import re
+import time
 
 import nltk
 from docx import Document
@@ -46,7 +47,7 @@ class DataProcessor:
     def get_jobs(self, title, location, page_limit):
         indeedApi = IndeedAPi()
         job_urls = indeedApi.retrieve_urls(title, location, page_limit)
-
+        time.sleep(15)
         # this list holds jobs that may have no content.
         unfiltered_jobs = [indeedApi.getJobMarkup(url) for url in job_urls]
 

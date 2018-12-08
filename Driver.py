@@ -42,7 +42,8 @@ def main():
 
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
 
-    # retrieve the top 5 job indices
+    # retrieve the top 5 job indices using argsort
+    # argsort sorts by putting the highest valued indice at the last index
     top_5_indices = similarity_score_whole.argsort()[:-6:-1]
 
     top_5_jobs = {}
@@ -60,18 +61,28 @@ def main():
     tf_idf_for_top_5_jobs_paragraphs = dp.tf_idf2(top_5_jobs_paragraphs, resumeListUpdated)
 
     # holds the similarity score between each paragraph in the resume with each paragraph in the top 5 jobs
-    similarity_scores = {}
+    similarity_scores_paragraphs = {}
     for doc_id, paragraph_scores in tf_idf_for_top_5_jobs_paragraphs.items():
-        similarity_scores[doc_id] = {}
+        similarity_scores_paragraphs[doc_id] = {}
         for paragraph_num, matrix in paragraph_scores.items():
-            similarity_scores[doc_id][paragraph_num] = dp.get_cosine_similarity(matrix[0], matrix[1])
+            similarity_scores_paragraphs[doc_id][paragraph_num] = dp.get_cosine_similarity(matrix[0], matrix[1])
 
     # store 3 closes paragraphs from job description for each paragraph in your resume
     top_3_paragraphs_per_job = {}
-    for doc_id, paragraph_scores in similarity_scores.items():
+    for doc_id, paragraph_scores in similarity_scores_paragraphs.items():
         top_3_paragraphs_per_job[doc_id] = {}
         for paragraph_num, scores in paragraph_scores.items():
             top_3_paragraphs_per_job[doc_id][paragraph_num] = scores.argsort()[:-4:-1]
+
+    # iterate through the dictionary that holds the top 3 paragraphs in jobs for each paragraph in the resume
+    # output the job title
+    # print the resume paragraph number
+    # print the closest paragraph indices that are close to the
+    for doc_id, paragraphs in top_3_paragraphs_per_job.items():
+        print("\njob %s" % doc_id)
+        print(jobs[doc_id]["title"])
+        for paragraph, scores in paragraphs.items():
+            print("paragraph %s in your resume is close to the following paragraph for this job \n" % paragraph, scores)
 
 
 main()
