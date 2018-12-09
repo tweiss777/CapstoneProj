@@ -19,6 +19,10 @@ def main():
     # This segregates the paragraphs in the resume
     resumeList = dp.process_resume("TalWeissResume.docx", True)
     resumeList = [paragraph for paragraph in resumeList if len(paragraph) > 0]
+
+    # Retrieve possible skills in resume by returning only the nouns found
+    possible_skills = dp.get_skills(resumeList)
+
     # pre process the resume
     resumeStrUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeStr)
     resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)  # Untested
@@ -78,11 +82,14 @@ def main():
     # output the job title
     # print the resume paragraph number
     # print the closest paragraph indices that are close to the
+    # print the actual scores themselves
     for doc_id, paragraphs in top_3_paragraphs_per_job.items():
         print("\njob %s" % doc_id)
         print(jobs[doc_id]["title"])
         for paragraph, scores in paragraphs.items():
             print("paragraph %s in your resume is close to the following paragraph for this job \n" % paragraph, scores)
+            print("Actual cosine similarity scores: ", similarity_scores_paragraphs[doc_id][paragraph][scores], "\n")
+
 
 
 main()

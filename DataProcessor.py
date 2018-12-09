@@ -292,22 +292,6 @@ class DataProcessor:
 
         return total_scores
 
-        # for i in range(len(jobs)):
-        #     singlejob = jobs[i]
-        #     corpus = []
-        #
-        #     #add paragraphs of the particular job to the corpus
-        #     for paragraph in singlejob["description"]:
-        #         paragraphstr = " ".join(word for word in paragraph)
-        #         corpus.append(paragraphstr)
-        #
-        #     #compute the score for each paragraph in the resume
-        #     for paragraph in resume:
-        #         corpusParagraph = " ".join(word for word in paragraph)
-        #         tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False,
-        #                                             stop_words=stopwords.words('english'))
-        #         x = tf_idf_vectorizer.fit_transform(corpus)
-        #         y = tf_idf_vectorizer.transform(corpusParagraph)
 
     # Function to get the cosine similarity
     # Takes in two document term frequency matrixes returned from the tf-idf function
@@ -380,3 +364,24 @@ class DataProcessor:
             # Returns the dataset where the description is turned into a list of lists of strings
             return dataset
 
+    # helper method to get skills from a corpus
+    # input: corpus such as a resume or job description
+    def get_skills(corpus):
+        # List of parts of speech to keep
+        # We are only wanting to keep the nouns
+        POS_to_keep = ["NN", "NNS", "NNP", "NNPS"]
+        possible_skills = []
+        # Check if what is being passed is a list of strings
+        if isinstance(list, corpus):
+            for section in corpus:
+                pos_tokenized_section = nltk.pos_tag(word_tokenize(section))
+                for word in pos_tokenized_section:
+                    if word[1] in POS_to_keep:
+                        possible_skills.append(word[0])
+            return possible_skills
+        # Check if a single string is being passed in
+        elif isinstance(str, corpus):
+            possible_skills = [word[0] for word in nltk.pos_tag(word_tokenize(corpus)) if word[0] in POS_to_keep]
+            return possible_skills
+        else:
+            Exception("List or string must be passed but other type found instead.")

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/CapstoneProj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CapstoneProj.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Driver.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="261" column="8" selection-start-line="261" selection-start-column="8" selection-end-line="261" selection-end-column="8" />
+            <state relative-caret-position="676">
+              <caret line="381" column="52" selection-start-line="381" selection-start-column="52" selection-end-line="381" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -25,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="811">
-              <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="436">
+              <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -78,8 +81,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="637" />
-    <option name="y" value="3" />
+    <option name="x" value="468" />
+    <option name="y" value="150" />
     <option name="width" value="1280" />
     <option name="height" value="730" />
   </component>
@@ -89,6 +92,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -100,7 +104,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -457,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544204526339</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="stored closest three paragraphs from jd for each resume paragraph">
+      <created>1544247720496</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1544247720496</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TodoView">
@@ -473,8 +483,8 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4272" visible="true" weight="0.16965227" />
-      <window_info id="Structure" order="1" sideWeight="0.5728" side_tool="true" weight="0.16965227" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.42666668" visible="true" weight="0.16965227" />
+      <window_info id="Structure" order="1" sideWeight="0.5733333" side_tool="true" visible="true" weight="0.16965227" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -486,7 +496,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.32719395" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50277996" side_tool="true" weight="0.3657534" />
-      <window_info active="true" anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.36511377" />
+      <window_info active="true" anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.34888887" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -572,7 +582,8 @@
     <MESSAGE value="Implemented method to extract bigrams for the entire corpus." />
     <MESSAGE value="testing cosine similarity" />
     <MESSAGE value="Implemented cosine similarity for document and paragraph number.&#10;&#10;Need to store closest three paragraphs from jd for each resume paragraph" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented cosine similarity for document and paragraph number.&#10;&#10;Need to store closest three paragraphs from jd for each resume paragraph" />
+    <MESSAGE value="stored closest three paragraphs from jd for each resume paragraph" />
+    <option name="LAST_COMMIT_MESSAGE" value="stored closest three paragraphs from jd for each resume paragraph" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -696,15 +707,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="261" column="8" selection-start-line="261" selection-start-column="8" selection-end-line="261" selection-end-column="8" />
+        <state relative-caret-position="676">
+          <caret line="381" column="52" selection-start-line="381" selection-start-column="52" selection-end-line="381" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="436">
+          <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
         </state>
       </provider>
     </entry>
