@@ -1,6 +1,5 @@
 # Import statements
 import re
-import time
 
 import nltk
 from docx import Document
@@ -47,7 +46,7 @@ class DataProcessor:
     def get_jobs(self, title, location, page_limit):
         indeedApi = IndeedAPi()
         job_urls = indeedApi.retrieve_urls(title, location, page_limit)
-        time.sleep(15)
+        # time.sleep(15)
         # this list holds jobs that may have no content.
         unfiltered_jobs = [indeedApi.getJobMarkup(url) for url in job_urls]
 
@@ -77,10 +76,10 @@ class DataProcessor:
             return paragraphs
         else:
             # Iterate through the array removing indices that have length of 0
-            for i in range(len(fullText)):
+            for text in fullText:
                 try:
-                    if len(fullText[i]) == 0:
-                        fullText.pop(i)
+                    if len(text) == 0:
+                        fullText.remove(text)
                 except IndexError:
                     print("Could not pop indice...")
             # iterate through the fullText array and strip \n and \t
@@ -111,7 +110,7 @@ class DataProcessor:
             for i in range(len(resumeNoStopWords)):
                 try:
                     if len(resumeNoStopWords[i]) < 2 and resumeNoStopWords[i][0] in '()~><?'';":\/|{},[]@6&*-_':
-                        resumeNoStopWords.pop(i)
+                        resumeNoStopWords.remove(resumeNoStopWords[i])
                 except IndexError:
                     print("Could not pop indice...")
             # retrieve parts of speech from each term in the resume, keeping only nouns verbs and adjectives
@@ -149,7 +148,7 @@ class DataProcessor:
                     try:
                         if len(resumeNoStopWords[i][j]) < 2 and resumeNoStopWords[i][j][
                             0] in '()~><?'';":\/|{},[]@6&*-_':
-                            resumeNoStopWords[i].pop(j)
+                            resumeNoStopWords[i].remove(resumeNoStopWords[i][j])
                     except IndexError:
                         print("Could not pop indice...")
 
@@ -366,13 +365,14 @@ class DataProcessor:
 
     # helper method to get skills from a corpus
     # input: corpus such as a resume or job description
+    # Implementation not working... fix it
     def get_skills(self, corpus):
         # List of parts of speech to keep
-        # We are only wanting to keep the nouns
-        POS_to_keep = ["NN", "NNS", "NNP", "NNPS"]
+        # We are only wanting to keep the nouns & adjectives
+        POS_to_keep = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]
         possible_skills = []
         # Check if what is being passed is a list of strings
-        if isinstance(list, corpus):
+        if isinstance(corpus, list):
             for section in corpus:
                 pos_tokenized_section = nltk.pos_tag(word_tokenize(section))
                 for word in pos_tokenized_section:
@@ -380,7 +380,7 @@ class DataProcessor:
                         possible_skills.append(word[0])
             return possible_skills
         # Check if a single string is being passed in
-        elif isinstance(str, corpus):
+        elif isinstance(corpus, str):
             possible_skills = [word[0] for word in nltk.pos_tag(word_tokenize(corpus)) if word[0] in POS_to_keep]
             return possible_skills
         else:

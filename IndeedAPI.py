@@ -39,31 +39,32 @@ class IndeedAPi:
 
         #site url contatinated with the href taken from the dom
         link = "https://indeed.com" + str(href)
+        try:
+            # retrieve the url even if its a redirect
+            initial_response = urllib.request.urlopen(link)
+            # final link of the redirect if there is one
+            finalLink = initial_response.geturl()
 
-        # retrieve the url even if its a redirect
-        initial_response = urllib.request.urlopen(link)
+            # time.sleep(5)
+            # initialize pool manager and request the html data from url
+            http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+            response = http.request('GET', finalLink)
+            html = response.data
 
-        # final link of the redirect if there is one
-        finalLink = initial_response.geturl()
+            soup = BeautifulSoup(html, 'html.parser')
+            job_title = soup.title.string
+            job_title = job_title.split('-')[0].rstrip()
 
-        # initialize pool manager and request the html data from url
-        http = urllib3.PoolManager(cert_reqs = 'CERT_REQUIRED', ca_certs = certifi.where())
-        response = http.request('GET', finalLink)
-        html = response.data
+            # find the tag that holds the description.
+            jdMarkup = soup.find_all('div', class_='jobsearch-JobComponent-description')
 
-        soup = BeautifulSoup(html, 'html.parser')
-        job_title = soup.title.string
-        job_title = job_title.split('-')[0].rstrip()
-
-
-        #find the tag that holds the description.
-        jdMarkup = soup.find_all('div',class_='jobsearch-JobComponent-description')
-
-        # when the job description cannot be found
-        if len(jdMarkup) < 1:
-            return
-        # return the title of the job and the html markup
-        return(job_title, jdMarkup[0])
+            # when the job description cannot be found
+            if len(jdMarkup) < 1:
+                return
+            # return the title of the job and the html markup
+            return (job_title, jdMarkup[0])
+        except Exception as inst:
+            print(inst)
 
 
 

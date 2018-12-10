@@ -83,12 +83,49 @@ def main():
     # print the resume paragraph number
     # print the closest paragraph indices that are close to the
     # print the actual scores themselves
-    for doc_id, paragraphs in top_3_paragraphs_per_job.items():
+    for doc_id, resume_paragraphs in top_3_paragraphs_per_job.items():
         print("\njob %s" % doc_id)
         print(jobs[doc_id]["title"])
-        for paragraph, scores in paragraphs.items():
-            print("paragraph %s in your resume is close to the following paragraph for this job \n" % paragraph, scores)
-            print("Actual cosine similarity scores: ", similarity_scores_paragraphs[doc_id][paragraph][scores], "\n")
+        for resume_paragraph, job_paragraphs in resume_paragraphs.items():
+            print("paragraph %s in your resume is close to the following paragraph for this job \n" % resume_paragraph,
+                  job_paragraphs)
+            print("Actual cosine similarity scores: ",
+                  similarity_scores_paragraphs[doc_id][resume_paragraph][job_paragraphs], "\n")
+
+    # Iterate through the top 3 paragraphs per job and take out the paragraphs that have a cosine sim of 0.
+    # Make a list of possible skills taken from nouns and adjectives (build a set of related words with skills.
+    # Play with the gensim library to get keywords
+    # Look at tf-idf by order of decreasing value for the words
+    for doc_id, paragraphs in top_3_paragraphs_per_job.items():
+        for resume_paragraph, job_paragraphs in paragraphs.items():
+            for i, job in enumerate(job_paragraphs):
+                try:
+                    top_3_paragraphs_per_job[doc_id][resume_paragraph] = top_3_paragraphs_per_job[doc_id][
+                        resume_paragraph].tolist()
+                except:
+                    print("conversion failed")
+
+                if similarity_scores_paragraphs[doc_id][resume_paragraph][job] == 0.0:
+                    print("removing indice with score %s" % similarity_scores_paragraphs[doc_id][resume_paragraph][job])
+                    print(i)
+                    # print(top_3_paragraphs_per_job[doc_id][resume_paragraph][i])
+                    try:
+                        top_3_paragraphs_per_job[doc_id][resume_paragraph].remove(job)
+                    except:
+                        print("could not pop indice")
+
+    # Output the filtered indices in which the similarity score is greater than 0
+    for doc_id, resume_paragraphs in top_3_paragraphs_per_job.items():
+        print("job %s" % doc_id)
+        for resume_paragraph, job_paragraphs in resume_paragraphs.items():
+            print("\njob paragraph % s " % job_paragraphs)
+            print("scores from job paragraphs")
+            for i, score in enumerate(similarity_scores_paragraphs[doc_id][resume_paragraph][job_paragraphs]):
+                print(score)
+
+                if score == 0.0:
+                    print("the score %s" % score, " was not removed and is associated with %s " %
+                          top_3_paragraphs_per_job[doc_id][resume_paragraph][i])
 
 
 
