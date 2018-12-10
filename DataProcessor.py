@@ -366,7 +366,7 @@ class DataProcessor:
 
     # helper method to get skills from a corpus
     # input: corpus such as a resume or job description
-    def get_skills(corpus):
+    def get_skills(self, corpus):
         # List of parts of speech to keep
         # We are only wanting to keep the nouns
         POS_to_keep = ["NN", "NNS", "NNP", "NNPS"]
