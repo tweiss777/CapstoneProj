@@ -1,15 +1,17 @@
+import numpy as np
 from gensim.summarization import keywords
 
 from DataProcessor import *
 
 
 def main():
+    # initialize the data processor object
     dp = DataProcessor()
 
     # Get the jobs from indeed.com
     jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
 
-
+    # get the bigrams for the paragraph separated jobs
     jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
 
     # strip certain parts of speech
@@ -20,6 +22,8 @@ def main():
 
     # This segregates the paragraphs in the resume
     resumeList = dp.process_resume("TalWeissResume.docx", True)
+
+    #filter out empty paragraphs
     resumeList = [paragraph for paragraph in resumeList if len(paragraph) > 0]
 
     # Retrieve possible skills in resume by returning only the nouns found
@@ -154,6 +158,20 @@ def main():
     # retrieve & store the vocabulary
     bagOfWords2 = tf_idf_vectorizer.vocabulary_
 
+    # Get the top n words from based on the highest tf-idf weights
+    # S1) get the feature names and store it in an numpy array
+    features_array = np.array(tf_idf_vectorizer.get_feature_names())
 
+    # S2) iterate through the job corpus and run argsort over each set of tf-idf weights in the compressed sparse matrix
+    # The below loop will also output the job title, list of top 10 terms, and weight that belongs to the term
+    for i in range(len(jobs)):
+        tfidf_sorting = np.argsort(x.toarray()[i]).flatten()[::-1]
+        print(jobs[i]["title"], "\n")
+        print("%s)" % i, features_array[tfidf_sorting][:10], "\n")
+        for j, score in enumerate(x.toarray()[i][tfidf_sorting][:10]):
+            print("%s) " % j, score, " %s" % features_array[tfidf_sorting][j])
+        print("\n")
+
+    # Get top n words based on the lowest
 
 main()
