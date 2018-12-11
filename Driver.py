@@ -1,3 +1,5 @@
+from gensim.summarization import keywords
+
 from DataProcessor import *
 
 
@@ -23,9 +25,12 @@ def main():
     # Retrieve possible skills in resume by returning only the nouns found
     possible_skills = dp.get_skills(resumeList)
 
+    # Get keywords from the resume
+    resume_keywords = keywords(resumeStr, pos_filter=("JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS"), split="\n")
+
     # pre process the resume
     resumeStrUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeStr)
-    resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)  # Untested
+    resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)
 
     # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
@@ -126,6 +131,28 @@ def main():
                 if score == 0.0:
                     print("the score %s" % score, " was not removed and is associated with %s " %
                           top_3_paragraphs_per_job[doc_id][resume_paragraph][i])
+
+    # get a list of keywords from the list of jobs using gensim.summarization
+    # filter keywords by
+    keywords_per_job = []
+    for job_id, job in jobs.items():
+        keywords_per_job.append(
+            keywords(job["description"], pos_filter=("JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS"), split="\n"))
+
+    # Get the tf-idf to determine the keywords from the job set
+    # Consider setting use_idf to true
+    tf_idf_vectorizer = TfidfVectorizer(use_idf=True, sublinear_tf=False, stop_words=stopwords.words('english'))
+
+    # create the dataset from the processed jobs dictionary
+    corpus = [" ".join(word for word in job["description"]) for i, job in processed_jobs_all_bigrams.items()]
+    resumeKeywordCorpus = " ".join(word for word in resume_keywords)
+    # Train the data set
+    x = tf_idf_vectorizer.fit_transform(corpus)
+    # pass the resume as the test set
+    y = tf_idf_vectorizer.transform([resumeKeywordCorpus])
+
+    # retrieve & store the vocabulary
+    bagOfWords2 = tf_idf_vectorizer.vocabulary_
 
 
 
