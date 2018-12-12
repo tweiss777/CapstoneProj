@@ -253,10 +253,10 @@ class DataProcessor:
         # This portion of code is untested
 
         # get the vocabulary
-        bagOfWords = tf_idf_vectorizer.vocabulary_
+        features = tf_idf_vectorizer.get_feature_names()
 
         # return tuple
-        return (x, y, bagOfWords)
+        return (x, y, features)
 
     # Tf-idf helper function for paragraphs in the resume to paragraphs in the job descriptions
     def tf_idf2(self, jobs, resume):
@@ -366,10 +366,10 @@ class DataProcessor:
     # helper method to get skills from a corpus
     # input: corpus such as a resume or job description
     # Implementation not working... fix it
-    def get_skills(self, corpus):
+    def get_skills(self, corpus, POS_to_keep):
         # List of parts of speech to keep
         # We are only wanting to keep the nouns & adjectives
-        POS_to_keep = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]
+        # POS_to_keep = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]
         possible_skills = []
         # Check if what is being passed is a list of strings
         if isinstance(corpus, list):

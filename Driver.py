@@ -27,7 +27,7 @@ def main():
     resumeList = [paragraph for paragraph in resumeList if len(paragraph) > 0]
 
     # Retrieve possible skills in resume by returning only the nouns found
-    possible_skills = dp.get_skills(resumeList)
+    possible_skills = dp.get_skills(resumeList, ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"])
 
     # Get keywords from the resume
     resume_keywords = keywords(resumeStr, pos_filter=("JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS"), split="\n")
@@ -155,6 +155,16 @@ def main():
     # pass the resume as the test set
     y = tf_idf_vectorizer.transform([resumeKeywordCorpus])
 
+    # obtain the similarity scores between the resume keywords and corpus
+    similarity_score_3 = dp.get_cosine_similarity(x, y)
+
+    # sort indices from higher to lower
+    sorted_sim_score_indices = similarity_score_3.argsort()[::-1]
+
+    # output the cosine similarity scores scores
+    for indice in sorted_sim_score_indices:
+        print(jobs[indice]["title"], " || ", similarity_score_3[indice])
+
     # retrieve & store the vocabulary
     bagOfWords2 = tf_idf_vectorizer.vocabulary_
 
@@ -172,6 +182,20 @@ def main():
             print("%s) " % j, score, " %s" % features_array[tfidf_sorting][j])
         print("\n")
 
-    # Get top n words based on the lowest
+    # Get top n words based on the lowest tf-idf weights
+    for i in range(len(jobs)):
+        copyX = np.array(x.toarray()[i].flatten())  # save a copy of the array
+        tfidf_sorting = np.argsort(copyX)
+
+        print("%s)" % i, jobs[i]["title"], "\n")
+        count = 0  # counter to keep track of the top terms to print
+        for j, score in enumerate(copyX[tfidf_sorting]):
+            if score > 0.0:
+                print("%s) " % count, score, " %s" % features_array[tfidf_sorting][j])  # print the features
+                count += 1
+                if count == 10:
+                    break  # exit loop if we printed out the top n terms
+        print("\n")
+
 
 main()
