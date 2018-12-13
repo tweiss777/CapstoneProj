@@ -116,7 +116,7 @@ class DataProcessor:
             # retrieve parts of speech from each term in the resume, keeping only nouns verbs and adjectives
             resumeNoStopWords = " ".join(w for w in resumeNoStopWords if len(w) > 0)
 
-            resumePOSTags = nltk.pos_tag(word_tokenize(resumeNoStopWords))
+            resumePOSTags = nltk.pos_tag(resumeNoStopWords.split())
             for w in resumePOSTags:
                 if w[1] not in POSToKeep:
                     resumePOSTags.remove(w)
@@ -366,6 +366,7 @@ class DataProcessor:
     # helper method to get skills from a corpus
     # input: corpus such as a resume or job description
     # Implementation not working... fix it
+    # Best to pass in a preprocessed corpus
     def get_skills(self, corpus, POS_to_keep):
         # List of parts of speech to keep
         # We are only wanting to keep the nouns & adjectives
@@ -374,14 +375,14 @@ class DataProcessor:
         # Check if what is being passed is a list of strings
         if isinstance(corpus, list):
             for section in corpus:
-                pos_tokenized_section = nltk.pos_tag(word_tokenize(section))
+                pos_tokenized_section = nltk.pos_tag(section.split())
                 for word in pos_tokenized_section:
                     if word[1] in POS_to_keep:
                         possible_skills.append(word[0])
             return possible_skills
         # Check if a single string is being passed in
         elif isinstance(corpus, str):
-            possible_skills = [word[0] for word in nltk.pos_tag(word_tokenize(corpus)) if word[1] in POS_to_keep]
+            possible_skills = [word[0] for word in nltk.pos_tag(corpus.split()) if word[1] in POS_to_keep]
             return possible_skills
         else:
             Exception("List or string must be passed but other type found instead.")

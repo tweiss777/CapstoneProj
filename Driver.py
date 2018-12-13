@@ -31,16 +31,20 @@ def main():
     resumeStrUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeStr)
     resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)
 
-    # Retrieve the keywords from the resume keeping only nouns and adjectives
-    r.extract_keywords_from_text(resumeStrUpdated)
-    resume_keywords = [word[0] for word in nltk.pos_tag(r.ranked_phrases) if
-                       word[1] not in ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS"]]
+    # Retrieve the key phrases from the resume by using nltk_rake library
+    r.extract_keywords_from_text(" ".join(word for word in resumeStrUpdated))
+    resume_key_phrases = r.get_ranked_phrases()
+
+    # get potential keywords filter by pos
+    resume_keywords = dp.get_skills(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
+    resume_keywords = list(set(resume_keywords))
 
     # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
     processed_jobs_noBigrams = processed_jobs
 
     # Method that will retrieve the bigrams for the jobs
+    # Bi-grams that appear twice or more
     processed_jobs_no_bigrams = processed_jobs
     for i in range(len(processed_jobs)):
         processed_jobs[i]["description"] = dp.get_bigrams(processed_jobs[i]["description"], 2)
@@ -137,7 +141,7 @@ def main():
                           top_3_paragraphs_per_job[doc_id][resume_paragraph][i])
 
     # get a list of keywords from the list of jobs using gensim.summarization
-    # filter keywords by
+    # Consider removing this list and for-loop as it is un
     keywords_per_job = []
     for job_id, job in jobs.items():
         keywords_per_job.append(
@@ -150,6 +154,7 @@ def main():
     # create the dataset from the processed jobs dictionary
     corpus = [" ".join(word for word in job["description"]) for i, job in processed_jobs_all_bigrams.items()]
     resumeKeywordCorpus = " ".join(word for word in resume_keywords)
+
     # Train the data set
     x = tf_idf_vectorizer.fit_transform(corpus)
     # pass the resume as the test set
@@ -158,12 +163,13 @@ def main():
     # obtain the similarity scores between the resume keywords and corpus
     similarity_score_3 = dp.get_cosine_similarity(x, y)
 
-    # sort indices from higher to lower
+    # sort indices from higher to lower score
     sorted_sim_score_indices = similarity_score_3.argsort()[::-1]
 
     # output the cosine similarity scores scores
+    print("============= COSINE SIMILARITY SCORES BETWEEN RESUME KEYWORDS AND JOBS =============")
     for indice in sorted_sim_score_indices:
-        print(jobs[indice]["title"], " || ", similarity_score_3[indice])
+        print("%s)" % indice, jobs[indice]["title"], " || ", similarity_score_3[indice])
 
 
     # Get the top n words from based on the highest tf-idf weights
@@ -172,6 +178,7 @@ def main():
 
     # S2) iterate through the job corpus and run argsort over each set of tf-idf weights in the compressed sparse matrix
     # The below loop will also output the job title, list of top 10 terms, and weight that belongs to the term
+    # Outputs score from highest to lowest
     for i in range(len(jobs)):
         tfidf_sorting = np.argsort(x.toarray()[i]).flatten()[::-1]
         print(jobs[i]["title"], "\n")

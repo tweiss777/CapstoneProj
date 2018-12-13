@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/CapstoneProj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CapstoneProj.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Driver.py" afterDir="false" />
@@ -14,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+            <state relative-caret-position="-1305">
+              <caret line="40" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="40" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -26,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="892">
-              <caret line="331" column="8" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
+            <state relative-caret-position="167">
+              <caret line="213" column="74" selection-start-line="213" selection-start-column="74" selection-end-line="213" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -72,6 +74,10 @@
       <find>look</find>
       <find>looking</find>
       <find>job</find>
+      <find>#</find>
+      <find>wor</find>
+      <find>tokenize</find>
+      <find>32) Java UI developer/ NYC</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -89,13 +95,13 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/KeyWordExtraction.py" />
         <option value="$PROJECT_DIR$/IndeedAPI.py" />
-        <option value="$PROJECT_DIR$/Driver.py" />
         <option value="$PROJECT_DIR$/DataProcessor.py" />
+        <option value="$PROJECT_DIR$/Driver.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-4" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="30" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="730" />
@@ -106,7 +112,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -118,12 +123,21 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="pyconsole" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="CapstoneProj" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="CapstoneProj" />
+      </console-settings>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -495,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544558258825</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="output top 10 terms based on high and low tf-idf weights &#10;got cosine similarity between resumekeywords and corpus">
+      <created>1544654525585</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1544654525585</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView">
@@ -508,11 +529,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="23" width="1280" height="730" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="730" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4247649" visible="true" weight="0.20015885" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.5752351" side_tool="true" visible="true" weight="0.20015885" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4198718" visible="true" weight="0.19936457" />
+      <window_info id="Structure" order="1" sideWeight="0.5801282" side_tool="true" visible="true" weight="0.19936457" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -524,7 +544,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.32719395" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50277996" side_tool="true" weight="0.3657534" />
-      <window_info anchor="bottom" x="136" y="45" width="1280" height="708" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.531348" />
+      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" visible="true" weight="0.5109718" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -613,7 +633,8 @@
     <MESSAGE value="stored closest three paragraphs from jd for each resume paragraph" />
     <MESSAGE value="Added an extra method to get potential skills from resume" />
     <MESSAGE value="retrieved top 10 words based on highest tf-idf weight&#10;need to retrieve the top 10 words based on lowest tf-idf weight" />
-    <option name="LAST_COMMIT_MESSAGE" value="retrieved top 10 words based on highest tf-idf weight&#10;need to retrieve the top 10 words based on lowest tf-idf weight" />
+    <MESSAGE value="output top 10 terms based on high and low tf-idf weights &#10;got cosine similarity between resumekeywords and corpus" />
+    <option name="LAST_COMMIT_MESSAGE" value="output top 10 terms based on high and low tf-idf weights &#10;got cosine similarity between resumekeywords and corpus" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -624,6 +645,16 @@
           <url>file://$PROJECT_DIR$/KeyWordExtraction.py</url>
           <line>193</line>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DataProcessor.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/DataProcessor.py</url>
+          <line>116</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -703,13 +734,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/instructions.txt" />
-    <entry file="file://$PROJECT_DIR$/RakeFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files/Python36/Lib/codecs.py" />
     <entry file="file://C:/Program Files/Python36/Lib/urllib/request.py" />
     <entry file="file://$PROJECT_DIR$/KeyWordExtraction.py">
@@ -743,20 +767,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+    <entry file="file://$PROJECT_DIR$/RakeFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="892">
-          <caret line="331" column="8" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
+        <state relative-caret-position="120">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="29" column="24" lean-forward="true" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+        <state relative-caret-position="-1305">
+          <caret line="40" lean-forward="true" selection-start-line="37" selection-start-column="4" selection-end-line="40" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="213" column="74" selection-start-line="213" selection-start-column="74" selection-end-line="213" selection-end-column="74" />
         </state>
       </provider>
     </entry>
