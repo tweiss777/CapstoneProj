@@ -1,4 +1,4 @@
-import re
+from DataProcessor import *
 
 
 def gen_paragraph(document):
@@ -45,3 +45,12 @@ def determine_headers(paragraphs):
 #     paragraphs = gen_paragraph(doc)
 #
 # print(paragraphs)
+
+
+def main():
+    dp = DataProcessor()
+
+    result = dp.strip_resume_stopwords_punctuation_pos("C#")
+
+
+main()

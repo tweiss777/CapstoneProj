@@ -381,7 +381,7 @@ class DataProcessor:
             return possible_skills
         # Check if a single string is being passed in
         elif isinstance(corpus, str):
-            possible_skills = [word[0] for word in nltk.pos_tag(word_tokenize(corpus)) if word[0] in POS_to_keep]
+            possible_skills = [word[0] for word in nltk.pos_tag(word_tokenize(corpus)) if word[1] in POS_to_keep]
             return possible_skills
         else:
             Exception("List or string must be passed but other type found instead.")

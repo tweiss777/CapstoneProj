@@ -7,7 +7,7 @@ from DataProcessor import *
 def main():
     # initialize the data processor object
     dp = DataProcessor()
-
+    r = Rake()
     # Get the jobs from indeed.com
     jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
 
@@ -26,15 +26,15 @@ def main():
     #filter out empty paragraphs
     resumeList = [paragraph for paragraph in resumeList if len(paragraph) > 0]
 
-    # Retrieve possible skills in resume by returning only the nouns found
-    possible_skills = dp.get_skills(resumeList, ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"])
-
-    # Get keywords from the resume
-    resume_keywords = keywords(resumeStr, pos_filter=("JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS"), split="\n")
 
     # pre process the resume
     resumeStrUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeStr)
     resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)
+
+    # Retrieve the keywords from the resume keeping only nouns and adjectives
+    r.extract_keywords_from_text(resumeStrUpdated)
+    resume_keywords = [word[0] for word in nltk.pos_tag(r.ranked_phrases) if
+                       word[1] not in ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS"]]
 
     # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
@@ -51,7 +51,7 @@ def main():
     # x = the jobs
     # y = the resume
     # process tf-idf for the whole resume
-    x1, y1, bagOfWords = dp.tf_idf(processed_jobs, resumeStrUpdated)
+    x1, y1, features = dp.tf_idf(processed_jobs, resumeStrUpdated)
 
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
 
@@ -165,8 +165,6 @@ def main():
     for indice in sorted_sim_score_indices:
         print(jobs[indice]["title"], " || ", similarity_score_3[indice])
 
-    # retrieve & store the vocabulary
-    bagOfWords2 = tf_idf_vectorizer.vocabulary_
 
     # Get the top n words from based on the highest tf-idf weights
     # S1) get the feature names and store it in an numpy array
