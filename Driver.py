@@ -5,6 +5,8 @@ from DataProcessor import *
 
 
 def main():
+    # BEGIN SECTION FOR PRE-PROCESSING
+
     # initialize the data processor object
     dp = DataProcessor()
     r = Rake()
@@ -39,6 +41,10 @@ def main():
     resume_keywords = dp.get_skills(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
     resume_keywords = list(set(resume_keywords))
 
+    # #getting keywords via gensim,
+    # resume_keywords = keywords(" ".join(w for w in resumeStrUpdated),split="\n")
+    # resume_keywords = [k[0] for k in nltk.pos_tag(resume_keywords) if k[1] in ["NN", "NNS", "NNP", "NNPS"]]
+    #
     # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
     processed_jobs_noBigrams = processed_jobs
@@ -58,6 +64,10 @@ def main():
     x1, y1, features = dp.tf_idf(processed_jobs, resumeStrUpdated)
 
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
+
+    # END OF PRE-PROCESSING SECTION
+
+    # BEGIN OUTPUTTING RESULTS
 
     # retrieve the top 5 job indices using argsort
     # argsort sorts by putting the highest valued indice at the last index
@@ -152,7 +162,8 @@ def main():
     tf_idf_vectorizer = TfidfVectorizer(use_idf=True, sublinear_tf=False, stop_words=stopwords.words('english'))
 
     # create the dataset from the processed jobs dictionary
-    corpus = [" ".join(word for word in job["description"]) for i, job in processed_jobs_all_bigrams.items()]
+    corpus = [job["title"] + " " + " ".join(word for word in job["description"]) for i, job in
+              processed_jobs_all_bigrams.items()]
     resumeKeywordCorpus = " ".join(word for word in resume_keywords)
 
     # Train the data set
@@ -179,6 +190,7 @@ def main():
     # S2) iterate through the job corpus and run argsort over each set of tf-idf weights in the compressed sparse matrix
     # The below loop will also output the job title, list of top 10 terms, and weight that belongs to the term
     # Outputs score from highest to lowest
+    print("============= TF-IDF for higher weight terms =============")
     for i in range(len(jobs)):
         tfidf_sorting = np.argsort(x.toarray()[i]).flatten()[::-1]
         print(jobs[i]["title"], "\n")
@@ -188,6 +200,7 @@ def main():
         print("\n")
 
     # Get top n words based on the lowest tf-idf weights
+    print("============= TF-IDF for lower weight terms =============")
     for i in range(len(jobs)):
         copyX = np.array(x.toarray()[i].flatten())  # save a copy of the array
         tfidf_sorting = np.argsort(copyX)
