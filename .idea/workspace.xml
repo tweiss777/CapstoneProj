@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/CapstoneProj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CapstoneProj.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Driver.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,29 +15,37 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataProcessor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="239" column="8" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Driver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Driver.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-243">
+                  <caret line="174" column="28" selection-start-line="174" selection-start-column="28" selection-end-line="174" selection-end-column="28" />
+                  <folding>
+                    <element signature="e#0#18#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                  <caret line="374" selection-start-line="374" selection-end-line="374" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,9 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>jobtitle turnstileLink</find>
-      <find>body</find>
-      <find>&lt;body</find>
       <find>d</find>
       <find>adver</find>
       <find>oral</find>
@@ -77,6 +83,9 @@
       <find>32) Java UI developer/ NYC</find>
       <find>python</find>
       <find>java</find>
+      <find>get_skills</find>
+      <find>gensim</find>
+      <find>resume_key</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -278,11 +287,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.IndeedAPI" />
       <item itemvalue="Python.AuthenticJobsApi" />
+      <item itemvalue="Python.Driver" />
+      <item itemvalue="Python.IndeedAPI" />
       <item itemvalue="Python.KeyWordExtraction" />
       <item itemvalue="Python.test" />
-      <item itemvalue="Python.Driver" />
     </list>
     <recent_temporary>
       <list>
@@ -528,23 +537,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="730" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.42444444" visible="true" weight="0.16965227" />
-      <window_info id="Structure" order="1" sideWeight="0.57555556" side_tool="true" visible="true" weight="0.16965227" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4106583" weight="0.19936457" />
+      <window_info id="Structure" order="1" sideWeight="0.5893417" side_tool="true" visible="true" weight="0.19936457" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3291536" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.44670847" />
-      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" weight="0.5062696" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" visible="true" weight="0.5062696" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.32719395" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50277996" side_tool="true" weight="0.3657534" />
-      <window_info active="true" anchor="bottom" x="-1920" y="23" width="1920" height="1017" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.40444446" />
+      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.40444446" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -645,6 +653,16 @@
           <url>file://$PROJECT_DIR$/KeyWordExtraction.py</url>
           <line>193</line>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Driver.py</url>
+          <line>179</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Driver.py</url>
+          <line>174</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -750,15 +768,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="239" column="8" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
+        <state relative-caret-position="102">
+          <caret line="374" selection-start-line="374" selection-end-line="374" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="-243">
+          <caret line="174" column="28" selection-start-line="174" selection-start-column="28" selection-end-line="174" selection-end-column="28" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

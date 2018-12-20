@@ -367,7 +367,8 @@ class DataProcessor:
     # input: corpus such as a resume or job description
     # Implementation not working... fix it
     # Best to pass in a preprocessed corpus
-    def get_skills(self, corpus, POS_to_keep):
+    # Consider passing in a tuple instead of a list
+    def filter_pos(self, corpus, POS_to_keep):
         # List of parts of speech to keep
         # We are only wanting to keep the nouns & adjectives
         # POS_to_keep = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]

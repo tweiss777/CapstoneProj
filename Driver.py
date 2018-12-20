@@ -38,7 +38,7 @@ def main():
     resume_key_phrases = r.get_ranked_phrases()
 
     # get potential keywords filter by pos
-    resume_keywords = dp.get_skills(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
+    resume_keywords = dp.filter_pos(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
     resume_keywords = list(set(resume_keywords))
 
     # #getting keywords via gensim,
@@ -166,6 +166,13 @@ def main():
               processed_jobs_all_bigrams.items()]
     resumeKeywordCorpus = " ".join(word for word in resume_keywords)
 
+    # filter the corpus by keeping only nouns for processing tf-idf results
+    corpus
+    for i in range(len(corpus)):
+        corpus[i] = " ".join(
+            word[0] for word in nltk.pos_tag(corpus[i].split()) if word[1] in ["NN", "NNS", "NNP", "NNPS"])
+
+    # tf-idf between keywords in the resume and the jobs
     # Train the data set
     x = tf_idf_vectorizer.fit_transform(corpus)
     # pass the resume as the test set
