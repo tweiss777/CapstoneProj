@@ -1,3 +1,5 @@
+import re as regex
+
 import numpy as np
 from gensim.summarization import keywords
 
@@ -5,6 +7,7 @@ from DataProcessor import *
 
 
 def main():
+    containsNumsSpecialChars = r'^[!@#$%^&*(),.?":{}|<>0-9]*$'
     # BEGIN SECTION FOR PRE-PROCESSING
 
     # initialize the data processor object
@@ -38,13 +41,14 @@ def main():
     resume_key_phrases = r.get_ranked_phrases()
 
     # get potential keywords filter by pos
-    resume_keywords = dp.filter_pos(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
-    resume_keywords = list(set(resume_keywords))
+    # resume_keywords = dp.filter_pos(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
+    # resume_keywords = list(set(resume_keywords))
 
     # #getting keywords via gensim,
-    # resume_keywords = keywords(" ".join(w for w in resumeStrUpdated),split="\n")
-    # resume_keywords = [k[0] for k in nltk.pos_tag(resume_keywords) if k[1] in ["NN", "NNS", "NNP", "NNPS"]]
-    #
+    resume_keywords = keywords(" ".join(w for w in resumeStrUpdated), split="\n")
+    resume_keywords = [w[0] for w in nltk.pos_tag(resume_keywords) if w[1] in ["NN", "NNS", "NNP", "NNPS"]]
+    resume_keywords = [w for w in resume_keywords if bool(regex.match(containsNumsSpecialChars, w)) is False]
+
     # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
     processed_jobs_noBigrams = processed_jobs
@@ -61,7 +65,7 @@ def main():
     # x = the jobs
     # y = the resume
     # process tf-idf for the whole resume
-    x1, y1, features = dp.tf_idf(processed_jobs, resumeStrUpdated)
+    x1, y1, features = dp.tf_idf(processed_jobs_all_bigrams, resumeStrUpdated)
 
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
 
@@ -167,7 +171,6 @@ def main():
     resumeKeywordCorpus = " ".join(word for word in resume_keywords)
 
     # filter the corpus by keeping only nouns for processing tf-idf results
-    corpus
     for i in range(len(corpus)):
         corpus[i] = " ".join(
             word[0] for word in nltk.pos_tag(corpus[i].split()) if word[1] in ["NN", "NNS", "NNP", "NNPS"])

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="included both methods of extracting keywords">
-      <change beforePath="$PROJECT_DIR$/.idea/CapstoneProj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CapstoneProj.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="Implemented regex to filter out strings containing numbers and special characters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Driver.py" afterDir="false" />
@@ -15,37 +13,29 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Driver.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-243">
-                  <caret line="174" column="28" selection-start-line="174" selection-start-column="28" selection-end-line="174" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#0#18#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/DataProcessor.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="374" selection-start-line="374" selection-end-line="374" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Driver.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="238" column="138" selection-start-line="238" selection-start-column="138" selection-end-line="238" selection-end-column="138" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -56,8 +46,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>d</find>
-      <find>adver</find>
       <find>oral</find>
       <find>resumetext</find>
       <find>resumenostop</find>
@@ -84,8 +72,10 @@
       <find>python</find>
       <find>java</find>
       <find>get_skills</find>
-      <find>gensim</find>
       <find>resume_key</find>
+      <find>gensim</find>
+      <find>resume</find>
+      <find>re.match</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,16 +93,14 @@
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/KeyWordExtraction.py" />
         <option value="$PROJECT_DIR$/IndeedAPI.py" />
-        <option value="$PROJECT_DIR$/DataProcessor.py" />
         <option value="$PROJECT_DIR$/Driver.py" />
+        <option value="$PROJECT_DIR$/DataProcessor.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="239" />
-    <option name="y" value="270" />
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1280" />
-    <option name="height" value="730" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -524,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1544654525585</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="renamed get_skills to filter_pos&#10;filtering for nouns before running tf-idf">
+      <created>1545336028348</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1545336028348</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TodoView">
@@ -537,22 +532,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="730" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4106583" weight="0.19936457" />
-      <window_info id="Structure" order="1" sideWeight="0.5893417" side_tool="true" visible="true" weight="0.19936457" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.40575916" visible="true" weight="0.19936457" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.59424084" side_tool="true" visible="true" weight="0.19936457" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291536" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.44670847" />
-      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" visible="true" weight="0.5062696" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" weight="0.30407524" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.32719395" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.3260188" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50277996" side_tool="true" weight="0.3657534" />
-      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="708" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" type="WINDOWED" visible="true" weight="0.40444446" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="694" id="Python Console" maximized="true" order="10" sideWeight="0.4980143" visible="true" weight="0.47671232" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -642,7 +638,8 @@
     <MESSAGE value="Added an extra method to get potential skills from resume" />
     <MESSAGE value="retrieved top 10 words based on highest tf-idf weight&#10;need to retrieve the top 10 words based on lowest tf-idf weight" />
     <MESSAGE value="output top 10 terms based on high and low tf-idf weights &#10;got cosine similarity between resumekeywords and corpus" />
-    <option name="LAST_COMMIT_MESSAGE" value="output top 10 terms based on high and low tf-idf weights &#10;got cosine similarity between resumekeywords and corpus" />
+    <MESSAGE value="renamed get_skills to filter_pos&#10;filtering for nouns before running tf-idf" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed get_skills to filter_pos&#10;filtering for nouns before running tf-idf" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -653,16 +650,6 @@
           <url>file://$PROJECT_DIR$/KeyWordExtraction.py</url>
           <line>193</line>
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Driver.py</url>
-          <line>179</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Driver.py</url>
-          <line>174</line>
-          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -766,20 +753,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataProcessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="374" selection-start-line="374" selection-end-line="374" />
-        </state>
-      </provider>
+    <entry file="file://$USER_HOME$/KiteOnboarding.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-243">
-          <caret line="174" column="28" selection-start-line="174" selection-start-column="28" selection-end-line="174" selection-end-column="28" />
+        <state relative-caret-position="152">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataProcessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="238" column="138" selection-start-line="238" selection-start-column="138" selection-end-line="238" selection-end-column="138" />
         </state>
       </provider>
     </entry>

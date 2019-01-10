@@ -168,6 +168,7 @@ class DataProcessor:
 
     # Pass in jobs dictionary, strip stopwords, remove certain parts of speech, and strip punctuation
     def process_jobs(self, jobs):
+        containsNumsSpecialChars = r'^[!@#$%^&*(),.?":{}|<>0-9]*$'
         POSToKeep = ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN", "VBP",
                      "VBZ"]  # These are the nouns, verbs, and adjectives we want to keep
         punctuation = '~><?'';:\/|{}[]@6&*-_,.'
@@ -183,6 +184,9 @@ class DataProcessor:
             # Store the words with the stopwords stripped out represented as a list
             jobsNoStopWords[i]["description"] = [w for w in jobs[i]["description"].split() if
                                                  w not in stopwords.words('english')]
+            # Filter out terms containing both numbers and special characters
+            jobsNoStopWords[i]["description"] = [w for w in jobs[i]["description"].split() if
+                                                 bool(re.match(containsNumsSpecialChars, w)) is False]
 
         jobsNoStopWordsUpdated = {}
 
@@ -210,6 +214,7 @@ class DataProcessor:
 
     # Method to process the paragraph separated jobs
     def process_jobs_paragraphs(self, jobs):
+        containsNumsSpecialChars = r'^[!@#$%^&*(),.?":{}|<>0-9]*$'
         POSToKeep = ["JJ", "JJR", "JJS", "NN", "NNS", "NNP", "NNPS", "VB", "VBD", "VBG", "VBN", "VBP",
                      "VBZ"]  # These are the nouns, verbs, and adjectives we want to keep
         punctuation = list('~><?'';:\/|{}[]@&*-_,.)(')
@@ -231,6 +236,9 @@ class DataProcessor:
             for j in range(len(jobs[i]["description"])):
                 jobs[i]["description"][j] = [word for word in jobs[i]["description"][j] if
                                              word not in stopwords.words('english')]
+                # Remove numbers and special characters only
+                jobs[i]["description"][j] = [word for word in jobs[i]["description"][j] if
+                                             bool(re.match(containsNumsSpecialChars, word)) is False]
 
         return jobs
     # Function to determine the tf_idf
