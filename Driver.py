@@ -166,18 +166,26 @@ def main():
     tf_idf_vectorizer = TfidfVectorizer(use_idf=True, sublinear_tf=False, stop_words=stopwords.words('english'))
 
     # create the dataset from the processed jobs dictionary
-    corpus = [job["title"] + " " + " ".join(word for word in job["description"]) for i, job in
-              processed_jobs_all_bigrams.items()]
+    # corpus = [job["title"] + " " + " ".join(word for word in job["description"]) for i, job in
+    #           processed_jobs_all_bigrams.items()]
     resumeKeywordCorpus = " ".join(word for word in resume_keywords)
 
-    # filter the corpus by keeping only nouns for processing tf-idf results
-    for i in range(len(corpus)):
-        corpus[i] = " ".join(
-            word[0] for word in nltk.pos_tag(corpus[i].split()) if word[1] in ["NN", "NNS", "NNP", "NNPS"])
+    corpus_keywords = []
+    for i in range(len(keywords_per_job)):
+        corpus_keywords.append(jobs[i]["title"] + " " + " ".join(keyword for keyword in keywords_per_job[i]))
+
+    # filter the corpus keywords by keeping only nouns for processing tf-idf results
+    for i in range(len(corpus_keywords)):
+        corpus_keywords[i] = " ".join(
+            word[0] for word in nltk.pos_tag(corpus_keywords[i].split()) if word[1] in ["NN", "NNS", "NNP", "NNPS"])
+
+    # filter the corpus by keeping only nouns for preprocessing.
+    # for i in range(len(corpus)):
+    #     corpus[i] = " ".join(w[0] for w in nltk.pos_tag(corpus[i].split()) if w[1] in ["NN","NNS","NNP","NNPS"])
 
     # tf-idf between keywords in the resume and the jobs
     # Train the data set
-    x = tf_idf_vectorizer.fit_transform(corpus)
+    x = tf_idf_vectorizer.fit_transform(corpus_keywords)
     # pass the resume as the test set
     y = tf_idf_vectorizer.transform([resumeKeywordCorpus])
 
