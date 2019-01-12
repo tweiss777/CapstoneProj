@@ -233,5 +233,13 @@ def main():
                     break  # exit loop if we printed out the top n terms
         print("\n")
 
+    # Section to get the matching keywords from the top 5 jobs in the corpus
+    # Untested method
+    matchingKeyWordsPerTop5Job = []
+    for i, indice in enumerate(top_5_indices):
+        jobKeywords = dp.compare_words(resumeStrUpdated, processed_jobs_all_bigrams[indice]["description"])
+        matchingKeyWordsPerTop5Job.append((i, jobKeywords))
+
+
 
 main()

@@ -395,3 +395,13 @@ class DataProcessor:
             return possible_skills
         else:
             Exception("List or string must be passed but other type found instead.")
+
+    # helper function to compare matching words resume and jobs
+    def compare_words(self, wordList1, wordList2, filter_pos=["NN", "NNS", "NNP", "NNPS"]):
+        matchingWords = []
+        for i in range(len(wordList1)):
+            for j in range(len(wordList2)):
+                if wordList1[i].lower() == wordList2[j].lower() and matchingWords.count(wordList1[i]) <= 1:
+                    matchingWords.append(wordList1[i])
+        matchingWords = [w[0] for w in nltk.pos_tag(matchingWords) if w[1] in filter_pos]
+        return matchingWords
