@@ -401,7 +401,19 @@ class DataProcessor:
         matchingWords = []
         for i in range(len(wordList1)):
             for j in range(len(wordList2)):
-                if wordList1[i].lower() == wordList2[j].lower() and matchingWords.count(wordList1[i]) <= 1:
+                if wordList1[i].lower() == wordList2[j].lower() and matchingWords.count(wordList1[i]) < 1:
                     matchingWords.append(wordList1[i])
         matchingWords = [w[0] for w in nltk.pos_tag(matchingWords) if w[1] in filter_pos]
-        return matchingWords
+
+        # List of non-matching words from the first word list
+        nonMatchingWords1 = []
+        # List of non-matching words from the second word list
+        nonMatchingWords2 = []
+        for word in wordList1:
+            if word not in matchingWords and nonMatchingWords1.count(word) < 1:
+                nonMatchingWords1.append(word)
+        for word in wordList2:
+            if word not in matchingWords and nonMatchingWords2.count(word) < 1:
+                nonMatchingWords2.append(word)
+
+        return matchingWords, nonMatchingWords1, nonMatchingWords2

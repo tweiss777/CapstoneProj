@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="added another helper method to compare two wordlist to find words in common.">
+    <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/CapstoneProj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CapstoneProj.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3430">
-              <caret selection-end-line="6" />
+            <state relative-caret-position="207">
+              <caret line="232" column="24" selection-start-line="232" selection-start-column="24" selection-end-line="232" selection-end-column="24" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="403" column="104" lean-forward="true" selection-start-line="403" selection-start-column="104" selection-end-line="403" selection-end-column="104" />
+            <state relative-caret-position="401">
+              <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
               <folding>
                 <element signature="e#20#29#0" expanded="true" />
               </folding>
@@ -98,8 +98,8 @@
         <option value="$PROJECT_DIR$/KeyWordExtraction.py" />
         <option value="$PROJECT_DIR$/IndeedAPI.py" />
         <option value="$PROJECT_DIR$/RakeFunctions.py" />
-        <option value="$PROJECT_DIR$/DataProcessor.py" />
         <option value="$PROJECT_DIR$/Driver.py" />
+        <option value="$PROJECT_DIR$/DataProcessor.py" />
       </list>
     </option>
   </component>
@@ -115,7 +115,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -127,6 +126,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -539,22 +539,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.39944905" visible="true" weight="0.19936457" />
-      <window_info id="Structure" order="1" sideWeight="0.60055095" side_tool="true" visible="true" weight="0.19915701" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.37254903" visible="true" weight="0.30400422" />
+      <window_info id="Structure" order="1" sideWeight="0.627451" side_tool="true" weight="0.27291885" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291536" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.68039006" />
-      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" weight="0.30273974" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40303358" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" weight="0.30227518" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.3260188" />
       <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.18440464" side_tool="true" weight="0.4767064" />
-      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="694" id="Python Console" maximized="true" order="10" sideWeight="0.8155954" visible="true" weight="0.47671232" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="694" id="Python Console" maximized="true" order="10" sideWeight="0.8155954" visible="true" weight="0.39219934" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -656,11 +656,6 @@
           <url>file://$PROJECT_DIR$/KeyWordExtraction.py</url>
           <line>193</line>
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DataProcessor.py</url>
-          <line>403</line>
-          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -771,18 +766,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="403" column="104" lean-forward="true" selection-start-line="403" selection-start-column="104" selection-end-line="403" selection-end-column="104" />
+        <state relative-caret-position="401">
+          <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
           <folding>
             <element signature="e#20#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/results.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3430">
-          <caret selection-end-line="6" />
+        <state relative-caret-position="207">
+          <caret line="232" column="24" selection-start-line="232" selection-start-column="24" selection-end-line="232" selection-end-column="24" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

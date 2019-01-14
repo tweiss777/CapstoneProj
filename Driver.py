@@ -236,9 +236,15 @@ def main():
     # Section to get the matching keywords from the top 5 jobs in the corpus
     # Untested method
     matchingKeyWordsPerTop5Job = []
-    for i, indice in enumerate(top_5_indices):
-        jobKeywords = dp.compare_words(resumeStrUpdated, processed_jobs_all_bigrams[indice]["description"])
-        matchingKeyWordsPerTop5Job.append((i, jobKeywords))
+    nonMatchingKeywordPerJobForResume = []
+    nonMatchingKeyWordsPerJob = []
+    for indice in top_5_indices:
+        jobKeywords, nonMatchingWordsResume, nonMatchingWordsJobs = dp.compare_words(resumeStrUpdated,
+                                                                                     processed_jobs_all_bigrams[indice][
+                                                                                         "description"])
+        matchingKeyWordsPerTop5Job.append((indice, jobKeywords))
+        nonMatchingKeywordPerJobForResume.append((indice, nonMatchingWordsResume))
+        nonMatchingKeyWordsPerJob.append((indice, nonMatchingWordsJobs))
 
 
 
