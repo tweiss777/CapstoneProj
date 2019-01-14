@@ -398,6 +398,10 @@ class DataProcessor:
 
     # helper function to compare matching words resume and jobs
     def compare_words(self, wordList1, wordList2, filter_pos=["NN", "NNS", "NNP", "NNPS"]):
+        # remove '' from args
+        wordList1 = [w for w in wordList1 if w != '' or len(w) >= 1]
+        wordList2 = [w for w in wordList2 if w != '' or len(w) >= 1]
+
         matchingWords = []
         for i in range(len(wordList1)):
             for j in range(len(wordList2)):
@@ -409,11 +413,12 @@ class DataProcessor:
         nonMatchingWords1 = []
         # List of non-matching words from the second word list
         nonMatchingWords2 = []
-        for word in wordList1:
-            if word not in matchingWords and nonMatchingWords1.count(word) < 1:
-                nonMatchingWords1.append(word)
-        for word in wordList2:
-            if word not in matchingWords and nonMatchingWords2.count(word) < 1:
-                nonMatchingWords2.append(word)
+        for word in nltk.pos_tag(wordList1):
+            if word[0] not in matchingWords and nonMatchingWords1.count(word[0]) < 1 and word[1] in filter_pos:
+                nonMatchingWords1.append(word[0])
+        for word in nltk.pos_tag(wordList2):
+            if word[0] not in matchingWords and nonMatchingWords2.count(word[0]) < 1 and word[1] in filter_pos:
+                nonMatchingWords2.append(word[0])
+
 
         return matchingWords, nonMatchingWords1, nonMatchingWords2
