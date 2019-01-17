@@ -398,6 +398,23 @@ class DataProcessor:
 
     # helper function to compare matching words resume and jobs
     def compare_words(self, wordList1, wordList2, filter_pos=["NN", "NNS", "NNP", "NNPS"]):
+        specialchars = '/!@$%^&*(),.?":{}|<>]*$-'
+
+        # Iterate through each word list and strip out special characters in the front and the end
+        for i, word in enumerate(wordList1):
+            if word[0] in specialchars:
+                wordList1[i] = word.replace(word[0], "")
+
+            if word[-1] in specialchars:
+                wordList1[i] = word.replace(word[-1], "")
+
+        for i, word in enumerate(wordList2):
+            if word[0] in specialchars:
+                wordList2[i] = word.replace(word[0], "")
+
+            if word[-1] in specialchars:
+                wordList2[i] = word.replace(word[-1], "")
+
         # remove '' from args
         wordList1 = [w for w in wordList1 if w != '' or len(w) >= 1]
         wordList2 = [w for w in wordList2 if w != '' or len(w) >= 1]

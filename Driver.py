@@ -241,7 +241,8 @@ def main():
     for indice in top_5_indices:
         jobKeywords, nonMatchingWordsResume, nonMatchingWordsJobs = dp.compare_words(resumeStrUpdated,
                                                                                      processed_jobs_all_bigrams[indice][
-                                                                                         "description"])
+                                                                                         "description"],
+                                                                                     filter_pos=["NN", "NNP"])
         matchingKeyWordsPerTop5Job.append((indice, jobKeywords))
         nonMatchingKeywordPerJobForResume.append((indice, nonMatchingWordsResume))
         nonMatchingKeyWordsPerJob.append((indice, nonMatchingWordsJobs))
