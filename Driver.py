@@ -233,19 +233,59 @@ def main():
                     break  # exit loop if we printed out the top n terms
         print("\n")
 
-    # Section to get the matching keywords from the top 5 jobs in the corpus
-    # Untested method
-    matchingKeyWordsPerTop5Job = []
+    # Section to get the matching keywords from the entire dataset sorted based on relevancy of job
+    top_indices = similarity_score_whole.argsort()[::-1]
+
+    # list that holds a tuple (job id, list of keywords) consisting of matching keywords from the job and resume
+    matchingKeyWordsPerJob = []
+
+    # holds a tuple that consists of keywords missing from the job description but found in the resume
     nonMatchingKeywordPerJobForResume = []
+
+    #holds a tuple that consists of keywords missing from the resume but found in the job description
     nonMatchingKeyWordsPerJob = []
-    for indice in top_5_indices:
+
+    for indice in top_indices:
         jobKeywords, nonMatchingWordsResume, nonMatchingWordsJobs = dp.compare_words(resumeStrUpdated,
                                                                                      processed_jobs_all_bigrams[indice][
                                                                                          "description"],
-                                                                                     filter_pos=["NN", "NNP"])
-        matchingKeyWordsPerTop5Job.append((indice, jobKeywords))
+                                                                                     filter_pos=["NNP"])
+        matchingKeyWordsPerJob.append((indice, jobKeywords))
         nonMatchingKeywordPerJobForResume.append((indice, nonMatchingWordsResume))
         nonMatchingKeyWordsPerJob.append((indice, nonMatchingWordsJobs))
+
+    # Dictionaries that store word as key and occurence as value
+    matchingKeywordsByFrequency = {}
+    nonMatchingKeywordsByFrequency = {}
+
+    # add keys to and values to dictionaries
+    for i in range(len(matchingKeyWordsPerJob)):
+        for j in range(len(matchingKeyWordsPerJob[i][1])):
+            occurenceOfWord = matchingKeyWordsPerJob[i][1][j]
+            if occurenceOfWord in matchingKeywordsByFrequency:
+                matchingKeywordsByFrequency[occurenceOfWord] += 1
+            else:
+                matchingKeywordsByFrequency[occurenceOfWord] = 1
+
+    for i in range(len(nonMatchingKeyWordsPerJob)):
+        for j in range(len(nonMatchingKeyWordsPerJob[i][1])):
+            occurenceOfWord = nonMatchingKeyWordsPerJob[i][1][j]
+            if occurenceOfWord in nonMatchingKeywordsByFrequency:
+                nonMatchingKeywordsByFrequency[occurenceOfWord] += 1
+            else:
+                nonMatchingKeywordsByFrequency[occurenceOfWord] = 1
+
+    # sort dictionary values based on frequency count
+    matchingKeywordsByFrequencySorted = sorted(matchingKeywordsByFrequency,
+                                               key=lambda x: matchingKeywordsByFrequency[x])
+    nonMatchingKeywordsByFrequencySorted = sorted(nonMatchingKeywordsByFrequency,
+                                                  key=lambda x: nonMatchingKeywordsByFrequency[x])
+
+    # filter list for non proper nouns
+    matchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(matchingKeywordsByFrequencySorted) if
+                                         pos_tag == "NNP"]
+    nonMatchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(nonMatchingKeywordsByFrequencySorted)
+                                            if pos_tag == "NNP"]
 
 
 

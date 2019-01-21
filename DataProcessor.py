@@ -400,6 +400,10 @@ class DataProcessor:
     def compare_words(self, wordList1, wordList2, filter_pos=["NN", "NNS", "NNP", "NNPS"]):
         specialchars = '/!@$%^&*(),.?":{}|<>]*$-'
 
+        # remove '' from args
+        wordList1 = [w for w in wordList1 if w != '' or len(w) >= 1]
+        wordList2 = [w for w in wordList2 if w != '' or len(w) >= 1]
+
         # Iterate through each word list and strip out special characters in the front and the end
         for i, word in enumerate(wordList1):
             if word[0] in specialchars:
@@ -414,10 +418,6 @@ class DataProcessor:
 
             if word[-1] in specialchars:
                 wordList2[i] = word.replace(word[-1], "")
-
-        # remove '' from args
-        wordList1 = [w for w in wordList1 if w != '' or len(w) >= 1]
-        wordList2 = [w for w in wordList2 if w != '' or len(w) >= 1]
 
         matchingWords = []
         for i in range(len(wordList1)):
