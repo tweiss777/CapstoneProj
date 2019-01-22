@@ -373,28 +373,24 @@ class DataProcessor:
 
     # helper method to get skills from a corpus
     # input: corpus such as a resume or job description
-    # Implementation not working... fix it
     # Best to pass in a preprocessed corpus
     # Consider passing in a tuple instead of a list
     def filter_pos(self, corpus, POS_to_keep):
+        specialchars = '/!@$%^&*(),.?":{}|<>]*$-'
         # List of parts of speech to keep
         # We are only wanting to keep the nouns & adjectives
         # POS_to_keep = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]
-        possible_skills = []
-        # Check if what is being passed is a list of strings
-        if isinstance(corpus, list):
-            for section in corpus:
-                pos_tokenized_section = nltk.pos_tag(section.split())
-                for word in pos_tokenized_section:
-                    if word[1] in POS_to_keep:
-                        possible_skills.append(word[0])
-            return possible_skills
-        # Check if a single string is being passed in
-        elif isinstance(corpus, str):
-            possible_skills = [word[0] for word in nltk.pos_tag(corpus.split()) if word[1] in POS_to_keep]
-            return possible_skills
-        else:
-            Exception("List or string must be passed but other type found instead.")
+        corpus = [w for w in corpus if w != '' or len(w) >= 1]
+        for i, word in enumerate(corpus):
+            if word[-1] in specialchars:
+                corpus[i] = word.replace(word[-1], "")
+
+            if word[0] in specialchars:
+                corpus[i] = word.replace(word[0], "")
+
+        corpusPosFiltered = [term for term, pos in nltk.pos_tag(corpus) if pos in POS_to_keep]
+
+        return corpusPosFiltered
 
     # helper function to compare matching words resume and jobs
     def compare_words(self, wordList1, wordList2, filter_pos=["NN", "NNS", "NNP", "NNPS"]):
@@ -406,18 +402,20 @@ class DataProcessor:
 
         # Iterate through each word list and strip out special characters in the front and the end
         for i, word in enumerate(wordList1):
-            if word[0] in specialchars:
-                wordList1[i] = word.replace(word[0], "")
+            if len(word) > 0:
+                if word[0] in specialchars:
+                    wordList1[i] = word.replace(word[0], "")
 
-            if word[-1] in specialchars:
-                wordList1[i] = word.replace(word[-1], "")
+                if word[-1] in specialchars:
+                    wordList1[i] = word.replace(word[-1], "")
 
         for i, word in enumerate(wordList2):
-            if word[0] in specialchars:
-                wordList2[i] = word.replace(word[0], "")
+            if len(word) > 0:
+                if word[0] in specialchars:
+                    wordList2[i] = word.replace(word[0], "")
 
-            if word[-1] in specialchars:
-                wordList2[i] = word.replace(word[-1], "")
+                if word[-1] in specialchars:
+                    wordList2[i] = word.replace(word[-1], "")
 
         matchingWords = []
         for i in range(len(wordList1)):

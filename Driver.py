@@ -245,6 +245,13 @@ def main():
     #holds a tuple that consists of keywords missing from the resume but found in the job description
     nonMatchingKeyWordsPerJob = []
 
+    # tuple that consists of job id and list of all keywords from the job only
+    jobKeyWordsOnly = []
+    for indice in top_indices:
+        jobKeywords = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
+        jobKeyWordsOnly.append((indice, jobKeywords))
+
+
     for indice in top_indices:
         jobKeywords, nonMatchingWordsResume, nonMatchingWordsJobs = dp.compare_words(resumeStrUpdated,
                                                                                      processed_jobs_all_bigrams[indice][
@@ -257,6 +264,14 @@ def main():
     # Dictionaries that store word as key and occurence as value
     matchingKeywordsByFrequency = {}
     nonMatchingKeywordsByFrequency = {}
+    jobKeywordsOnlyFrequency = {}
+
+    for job_id, terms in jobKeyWordsOnly:
+        for term in terms:
+            if term in jobKeywordsOnlyFrequency:
+                jobKeywordsOnlyFrequency[term] += 1
+            else:
+                jobKeywordsOnlyFrequency[term] = 1
 
     # add keys to and values to dictionaries
     for i in range(len(matchingKeyWordsPerJob)):
@@ -286,7 +301,35 @@ def main():
                                          pos_tag == "NNP"]
     nonMatchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(nonMatchingKeywordsByFrequencySorted)
                                             if pos_tag == "NNP"]
+    jobKeywordsOnlyFrequencySorted = sorted(jobKeywordsOnlyFrequency, key=lambda x: jobKeywordsOnlyFrequency[x])
 
+    # get the sum of the total number of words in the entire job set
+    totalWordsInJobSet = 0
+    for term, count in jobKeywordsOnlyFrequency.items():
+        totalWordsInJobSet = totalWordsInJobSet + count
 
+    # filter the words with a frequency greater than 5%
+    jobKeywordsOnlyFrequencySortedUpdated = [term for term in jobKeywordsOnlyFrequencySorted if
+                                             (jobKeywordsOnlyFrequency[term] / totalWordsInJobSet) * (100) >= .15]
+
+    nonMatchingKeywordsByFrequencySortedUpdated = []
+    matchingKeywordsByFrequencySortedUpdated = []
+
+    # # Split lists based on the following regular expression !@$%^&*()/,.?":{}|<> to remove redundant proper nouns from both lists
+    # nonMatchingKeywordsByFrequencySortedUpdated = []
+    # matchingKeywordsByFrequencySortedUpdated = []
+    #
+    # for term in nonMatchingKeywordsByFrequencySorted:
+    #     nnps = regex.split(r'[!@$%^&*()/\,.?":{}|<>]', term)
+    #     for nnp in nnps:
+    #         nonMatchingKeywordsByFrequencySortedUpdated.append(nnp)
+    #
+    # for term in matchingKeywordsByFrequencySortedUpdated:
+    #     nnps = regex.split(r'[!@$%^&*()/\,.?":{}|<>]', term)
+    #     for nnp in nnps:
+    #         matchingKeywordsByFrequencySortedUpdated.append(nnp)
+    #
+    # #remove duplicates again
+    # nonMatchingKeywordsByFrequencySortedUpdated = [t for t in nonMatchingKeywordsByFrequencySortedUpdated if nonMatchingKeywordsByFrequencySortedUpdated.count(t) <= 1]
 
 main()
