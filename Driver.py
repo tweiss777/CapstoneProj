@@ -245,6 +245,12 @@ def main():
     #holds a tuple that consists of keywords missing from the resume but found in the job description
     nonMatchingKeyWordsPerJob = []
 
+    # updated list of words from the resume filtered for proper nouns
+    resumeStrUpdatedPosFiltered = dp.filter_pos(resumeStrUpdated, POS_to_keep=["NNP"])
+
+    # Lowercase the terms from the resume to be used to find intersection with the propernouns
+    resumeProperNouns = [t.lowe() for t in resumeStrUpdatedPosFiltered]
+
     # tuple that consists of job id and list of all keywords from the job only
     jobKeyWordsOnly = []
     for indice in top_indices:
@@ -297,6 +303,7 @@ def main():
                                                   key=lambda x: nonMatchingKeywordsByFrequency[x])
 
     # filter list for non proper nouns
+    # not sure if the two variables below are needed (consider removing).
     matchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(matchingKeywordsByFrequencySorted) if
                                          pos_tag == "NNP"]
     nonMatchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(nonMatchingKeywordsByFrequencySorted)
@@ -308,28 +315,18 @@ def main():
     for term, count in jobKeywordsOnlyFrequency.items():
         totalWordsInJobSet = totalWordsInJobSet + count
 
-    # filter the words with a frequency greater than 5%
+    # filter the words with a frequency greater than 1.5%
     jobKeywordsOnlyFrequencySortedUpdated = [term for term in jobKeywordsOnlyFrequencySorted if
                                              (jobKeywordsOnlyFrequency[term] / totalWordsInJobSet) * (100) >= .15]
 
-    nonMatchingKeywordsByFrequencySortedUpdated = []
-    matchingKeywordsByFrequencySortedUpdated = []
+    # get the intersection of words from the resume and the proper nouns
 
-    # # Split lists based on the following regular expression !@$%^&*()/,.?":{}|<> to remove redundant proper nouns from both lists
-    # nonMatchingKeywordsByFrequencySortedUpdated = []
-    # matchingKeywordsByFrequencySortedUpdated = []
-    #
-    # for term in nonMatchingKeywordsByFrequencySorted:
-    #     nnps = regex.split(r'[!@$%^&*()/\,.?":{}|<>]', term)
-    #     for nnp in nnps:
-    #         nonMatchingKeywordsByFrequencySortedUpdated.append(nnp)
-    #
-    # for term in matchingKeywordsByFrequencySortedUpdated:
-    #     nnps = regex.split(r'[!@$%^&*()/\,.?":{}|<>]', term)
-    #     for nnp in nnps:
-    #         matchingKeywordsByFrequencySortedUpdated.append(nnp)
-    #
-    # #remove duplicates again
-    # nonMatchingKeywordsByFrequencySortedUpdated = [t for t in nonMatchingKeywordsByFrequencySortedUpdated if nonMatchingKeywordsByFrequencySortedUpdated.count(t) <= 1]
+    # initialize var called properNouns which will take the terms from the jobKeyWordsOnlyFrequencySortedUpdated and lower case the terms
+    properNouns = [t.lower() for t in jobKeywordsOnlyFrequencySortedUpdated]
+
+    # typecase properNouns to a set
+    properNounsSet = set(properNouns)
+
+    #retrieve the intersection of resume terms and proper nouns below
 
 main()
