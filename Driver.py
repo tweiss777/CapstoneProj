@@ -249,7 +249,7 @@ def main():
     resumeStrUpdatedPosFiltered = dp.filter_pos(resumeStrUpdated, POS_to_keep=["NNP"])
 
     # Lowercase the terms from the resume to be used to find intersection with the propernouns
-    resumeProperNouns = [t.lowe() for t in resumeStrUpdatedPosFiltered]
+    resumeProperNouns = [t.lower() for t in resumeStrUpdatedPosFiltered]
 
     # tuple that consists of job id and list of all keywords from the job only
     jobKeyWordsOnly = []
@@ -267,9 +267,7 @@ def main():
         nonMatchingKeywordPerJobForResume.append((indice, nonMatchingWordsResume))
         nonMatchingKeyWordsPerJob.append((indice, nonMatchingWordsJobs))
 
-    # Dictionaries that store word as key and occurence as value
-    matchingKeywordsByFrequency = {}
-    nonMatchingKeywordsByFrequency = {}
+
     jobKeywordsOnlyFrequency = {}
 
     for job_id, terms in jobKeyWordsOnly:
@@ -279,35 +277,8 @@ def main():
             else:
                 jobKeywordsOnlyFrequency[term] = 1
 
-    # add keys to and values to dictionaries
-    for i in range(len(matchingKeyWordsPerJob)):
-        for j in range(len(matchingKeyWordsPerJob[i][1])):
-            occurenceOfWord = matchingKeyWordsPerJob[i][1][j]
-            if occurenceOfWord in matchingKeywordsByFrequency:
-                matchingKeywordsByFrequency[occurenceOfWord] += 1
-            else:
-                matchingKeywordsByFrequency[occurenceOfWord] = 1
 
-    for i in range(len(nonMatchingKeyWordsPerJob)):
-        for j in range(len(nonMatchingKeyWordsPerJob[i][1])):
-            occurenceOfWord = nonMatchingKeyWordsPerJob[i][1][j]
-            if occurenceOfWord in nonMatchingKeywordsByFrequency:
-                nonMatchingKeywordsByFrequency[occurenceOfWord] += 1
-            else:
-                nonMatchingKeywordsByFrequency[occurenceOfWord] = 1
 
-    # sort dictionary values based on frequency count
-    matchingKeywordsByFrequencySorted = sorted(matchingKeywordsByFrequency,
-                                               key=lambda x: matchingKeywordsByFrequency[x])
-    nonMatchingKeywordsByFrequencySorted = sorted(nonMatchingKeywordsByFrequency,
-                                                  key=lambda x: nonMatchingKeywordsByFrequency[x])
-
-    # filter list for non proper nouns
-    # not sure if the two variables below are needed (consider removing).
-    matchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(matchingKeywordsByFrequencySorted) if
-                                         pos_tag == "NNP"]
-    nonMatchingKeywordsByFrequencySorted = [term for term, pos_tag in nltk.pos_tag(nonMatchingKeywordsByFrequencySorted)
-                                            if pos_tag == "NNP"]
     jobKeywordsOnlyFrequencySorted = sorted(jobKeywordsOnlyFrequency, key=lambda x: jobKeywordsOnlyFrequency[x])
 
     # get the sum of the total number of words in the entire job set
@@ -315,7 +286,7 @@ def main():
     for term, count in jobKeywordsOnlyFrequency.items():
         totalWordsInJobSet = totalWordsInJobSet + count
 
-    # filter the words with a frequency greater than 1.5%
+    # filter the words with a frequency greater than 1.5% (L1)
     jobKeywordsOnlyFrequencySortedUpdated = [term for term in jobKeywordsOnlyFrequencySorted if
                                              (jobKeywordsOnlyFrequency[term] / totalWordsInJobSet) * (100) >= .15]
 
@@ -324,9 +295,32 @@ def main():
     # initialize var called properNouns which will take the terms from the jobKeyWordsOnlyFrequencySortedUpdated and lower case the terms
     properNouns = [t.lower() for t in jobKeywordsOnlyFrequencySortedUpdated]
 
-    # typecase properNouns to a set
+    # typecase properNouns to a set same with proper nouns from the resume
     properNounsSet = set(properNouns)
+    resumeProperNounsSet = set(resumeProperNouns)
 
-    #retrieve the intersection of resume terms and proper nouns below
+    # retrieve the intersection of resume terms and proper nouns below (L2
+    intersectionResumeJobs = resumeProperNounsSet.intersection(properNounsSet)
+
+    # retrieve the intersection of the words from each of the top 5 jobs with the proper nouns (L3)
+    matchingProperNounsPerTop5Jobs = []
+    for indice in top_5_indices:
+        nnps = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
+        nnps = [t.lower() for t in nnps]
+        matchingProperNounsPerTop5Jobs.append((indice, properNounsSet.intersection(set(nnps))))
+
+    properNounsResumeNTop5Jobs = []
+    # retrieve the intersection between the keywords in your resume and top 5 jobs
+    for indice, properNouns in matchingProperNounsPerTop5Jobs:
+        properNounsResumeNTop5Jobs.append((indice, properNouns.intersection(resumeProperNounsSet)))
+
+    # retrieve the proper noun non-matches between each of the top 5 jobs and the resume
+    nonMatchesPerTop5Jobs = []
+
+    # add terms that are in the job description but not in the resume
+    for jobId, terms in matchingProperNounsPerTop5Jobs:
+        nonMatchesPerTop5Jobs.append((jobId, [t for t in terms if t not in intersectionResumeJobs]))
+
+
 
 main()
