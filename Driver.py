@@ -236,14 +236,6 @@ def main():
     # Section to get the matching keywords from the entire dataset sorted based on relevancy of job
     top_indices = similarity_score_whole.argsort()[::-1]
 
-    # list that holds a tuple (job id, list of keywords) consisting of matching keywords from the job and resume
-    matchingKeyWordsPerJob = []
-
-    # holds a tuple that consists of keywords missing from the job description but found in the resume
-    nonMatchingKeywordPerJobForResume = []
-
-    #holds a tuple that consists of keywords missing from the resume but found in the job description
-    nonMatchingKeyWordsPerJob = []
 
     # updated list of words from the resume filtered for proper nouns
     resumeStrUpdatedPosFiltered = dp.filter_pos(resumeStrUpdated, POS_to_keep=["NNP"])
@@ -257,15 +249,6 @@ def main():
         jobKeywords = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
         jobKeyWordsOnly.append((indice, jobKeywords))
 
-
-    for indice in top_indices:
-        jobKeywords, nonMatchingWordsResume, nonMatchingWordsJobs = dp.compare_words(resumeStrUpdated,
-                                                                                     processed_jobs_all_bigrams[indice][
-                                                                                         "description"],
-                                                                                     filter_pos=["NNP"])
-        matchingKeyWordsPerJob.append((indice, jobKeywords))
-        nonMatchingKeywordPerJobForResume.append((indice, nonMatchingWordsResume))
-        nonMatchingKeyWordsPerJob.append((indice, nonMatchingWordsJobs))
 
 
     jobKeywordsOnlyFrequency = {}
