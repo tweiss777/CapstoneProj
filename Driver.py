@@ -250,39 +250,40 @@ def main():
         jobKeywords = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
         jobKeyWordsOnly.append((indice, jobKeywords))
 
-
-
-    jobKeywordsOnlyFrequency = {}
-
+    jobsKeyWordCount = Counter()
     for job_id, terms in jobKeyWordsOnly:
         for term in terms:
-            if term in jobKeywordsOnlyFrequency:
-                jobKeywordsOnlyFrequency[term] += 1
-            else:
-                jobKeywordsOnlyFrequency[term] = 1
+            jobsKeyWordCount[term] += 1
 
+    # jobKeywordsOnlyFrequency = {}
+    #
+    # for job_id, terms in jobKeyWordsOnly:
+    #     for term in terms:
+    #         if term in jobKeywordsOnlyFrequency:
+    #             jobKeywordsOnlyFrequency[term] += 1
+    #         else:
+    #             jobKeywordsOnlyFrequency[term] = 1
 
-
-    jobKeywordsOnlyFrequencySorted = sorted(jobKeywordsOnlyFrequency, key=lambda x: jobKeywordsOnlyFrequency[x])
+    sortedJobKeyWordCount = sorted(jobsKeyWordCount, key=lambda x: jobsKeyWordCount[x])
 
     # get the sum of the total number of words in the entire job set
     totalWordsInJobSet = 0
-    for term, count in jobKeywordsOnlyFrequency.items():
+    for term, count in jobsKeyWordCount.items():
         totalWordsInJobSet = totalWordsInJobSet + count
 
     # filter the words with a frequency threshold greater than 1.5% (L1)
-    jobKeywordsOnlyFrequencySortedUpdated = [term for term in jobKeywordsOnlyFrequencySorted if
-                                             (jobKeywordsOnlyFrequency[term] / totalWordsInJobSet) * (100) >= .15]
+    sortedJobKeyWordCountFiltered = [term for term in sortedJobKeyWordCount if
+                                     (jobsKeyWordCount[term] / totalWordsInJobSet) * (100) >= .15]
 
     # get the intersection of words from the resume and the proper nouns
     # initialize var called properNouns which will take the terms from the jobKeyWordsOnlyFrequencySortedUpdated and lower case the terms
-    properNouns = [t.lower() for t in jobKeywordsOnlyFrequencySortedUpdated]
+    properNouns = [t.lower() for t in sortedJobKeyWordCountFiltered]
 
     # typecase properNouns to a set same with proper nouns from the resume
     properNounsSet = set(properNouns)
     resumeProperNounsSet = set(resumeProperNouns)
 
-    # retrieve the intersection of resume terms and proper nouns below (L2
+    # retrieve the intersection of resume terms and proper nouns below (L2)
     intersectionResumeJobs = resumeProperNounsSet.intersection(properNounsSet)
 
     # retrieve the intersection of the words from each of the top 5 jobs with the proper nouns (L3)
@@ -293,7 +294,7 @@ def main():
         matchingProperNounsPerTop5Jobs.append((indice, properNounsSet.intersection(set(nnps))))
 
     properNounsResumeNTop5Jobs = []
-    # retrieve the intersection between the keywords in your resume and top 5 jobs
+    # retrieve the intersection between the proper nouns in your resume and top 5 jobs
     for indice, properNouns in matchingProperNounsPerTop5Jobs:
         properNounsResumeNTop5Jobs.append((indice, properNouns.intersection(resumeProperNounsSet)))
 
@@ -304,18 +305,16 @@ def main():
     for jobId, terms in matchingProperNounsPerTop5Jobs:
         nonMatchesPerTop5Jobs.append((jobId, [t for t in terms if t not in intersectionResumeJobs]))
 
-    # Counter object used for storing the frequency of the difference of the terms between the matching proper nouns of the jobs and the resume
-    wordCount = Counter()
-    for jobID, terms in nonMatchesPerTop5Jobs:
-        for term in terms:
-            wordCount[term] += 1
+    # Add the difference of terms to a list to be sorted and filtered
+    nonMatches = []
+    for term, count in jobsKeyWordCount.items():
+        for job, terms in nonMatchesPerTop5Jobs:
+            for t in terms:
+                if t == term.lower() and nonMatches.count(term) < 1:
+                    nonMatches.append(term)
 
-    # Convert the frequency to a percentage
-    for term, count in wordCount.items():
-        wordCount[term] = (count / totalWordsInJobSet) * 100
-
-    # Filter the terms by a certain frequency threshold
-
+    sortedNonMatches = sorted(nonMatches, key=lambda x: jobsKeyWordCount[x])
+    sortedNonMatchesFiltered = [t for t in sortedNonMatches if (jobsKeyWordCount[t] / totalWordsInJobSet) * 100 < 0.5]
 
 
 
