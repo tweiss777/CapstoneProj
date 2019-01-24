@@ -1,4 +1,5 @@
 import re as regex
+from collections import Counter
 
 import numpy as np
 from gensim.summarization import keywords
@@ -269,12 +270,11 @@ def main():
     for term, count in jobKeywordsOnlyFrequency.items():
         totalWordsInJobSet = totalWordsInJobSet + count
 
-    # filter the words with a frequency greater than 1.5% (L1)
+    # filter the words with a frequency threshold greater than 1.5% (L1)
     jobKeywordsOnlyFrequencySortedUpdated = [term for term in jobKeywordsOnlyFrequencySorted if
                                              (jobKeywordsOnlyFrequency[term] / totalWordsInJobSet) * (100) >= .15]
 
     # get the intersection of words from the resume and the proper nouns
-
     # initialize var called properNouns which will take the terms from the jobKeyWordsOnlyFrequencySortedUpdated and lower case the terms
     properNouns = [t.lower() for t in jobKeywordsOnlyFrequencySortedUpdated]
 
@@ -303,6 +303,19 @@ def main():
     # add terms that are in the job description but not in the resume
     for jobId, terms in matchingProperNounsPerTop5Jobs:
         nonMatchesPerTop5Jobs.append((jobId, [t for t in terms if t not in intersectionResumeJobs]))
+
+    # Counter object used for storing the frequency of the difference of the terms between the matching proper nouns of the jobs and the resume
+    wordCount = Counter()
+    for jobID, terms in nonMatchesPerTop5Jobs:
+        for term in terms:
+            wordCount[term] += 1
+
+    # Convert the frequency to a percentage
+    for term, count in wordCount.items():
+        wordCount[term] = (count / totalWordsInJobSet) * 100
+
+    # Filter the terms by a certain frequency threshold
+
 
 
 
