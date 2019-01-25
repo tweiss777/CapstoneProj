@@ -313,8 +313,19 @@ def main():
                 if t == term.lower() and nonMatches.count(term) < 1:
                     nonMatches.append(term)
 
+    # filter for non matching terms with a threshold greater than 0.5%
     sortedNonMatches = sorted(nonMatches, key=lambda x: jobsKeyWordCount[x])
     sortedNonMatchesFiltered = [t for t in sortedNonMatches if (jobsKeyWordCount[t] / totalWordsInJobSet) * 100 < 0.5]
+
+    # Split sortedNonMatchesFiltered based on this regular expression '[:\() \s]'
+    sortedNonMatchesFilteredSplit = [regex.split(r'[:\() \s]', nonMatch) for nonMatch in sortedNonMatchesFiltered]
+
+    # Create a list of possible missing skills from the resume
+    possibleMissingSkills = []
+    for lst in sortedNonMatchesFilteredSplit:
+        for t in lst:
+            if t not in intersectionResumeJobs:
+                possibleMissingSkills.append(t)
 
 
 
