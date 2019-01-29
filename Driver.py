@@ -1,5 +1,6 @@
 import re as regex
 from collections import Counter
+from pprint import pprint
 
 import numpy as np
 from gensim.summarization import keywords
@@ -16,6 +17,9 @@ def main():
     r = Rake()
     # Get the jobs from indeed.com
     jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
+
+    for i in range(len(jobs)):
+        jobs[i]["description"] = dp.joinByRegex(jobs[i]["description"])
 
     # get the bigrams for the paragraph separated jobs
     jobs2_bigrams = dp.get_all_bigrams_paragraphs(jobs2, 3)
@@ -318,15 +322,20 @@ def main():
     sortedNonMatchesFiltered = [t for t in sortedNonMatches if (jobsKeyWordCount[t] / totalWordsInJobSet) * 100 < 0.5]
 
     # Split sortedNonMatchesFiltered based on this regular expression '[:\() \s]'
-    sortedNonMatchesFilteredSplit = [regex.split(r'[:\() \s]', nonMatch) for nonMatch in sortedNonMatchesFiltered]
+    sortedNonMatchesFilteredSplit = [regex.split(r'[:\()/ \s]', nonMatch) for nonMatch in sortedNonMatchesFiltered]
 
     # Create a list of possible missing skills from the resume
     possibleMissingSkills = []
     for lst in sortedNonMatchesFilteredSplit:
         for t in lst:
-            if t not in intersectionResumeJobs:
+            if t.lower() not in intersectionResumeJobs:
                 possibleMissingSkills.append(t)
 
+    print("Intersection between resume and job set (matching terms from both resume and the jobs)")
+    pprint(properNounsResumeNTop5Jobs)
+
+    print("Possible missing skills\n")
+    pprint(possibleMissingSkills)
 
 
 main()

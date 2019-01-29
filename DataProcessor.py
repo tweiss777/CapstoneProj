@@ -12,6 +12,7 @@ from IndeedAPI import *
 
 
 class DataProcessor:
+
     # function to get paragraphs / sections from word document
     def gen_paragraph(self, document):
         # holds the document paragraphs
@@ -285,7 +286,6 @@ class DataProcessor:
             # Create a nested dictionary where the key is the paragraph
             total_scores[job_num[0]] = {}
             # compute the score for each paragraph in the resume
-            print(corpus)
             for paragraph in resume:
                 corpusParagraph = " ".join(word for word in paragraph)
                 tf_idf_vectorizer = TfidfVectorizer(use_idf=False, sublinear_tf=False,
@@ -437,3 +437,55 @@ class DataProcessor:
 
 
         return matchingWords, nonMatchingWords1, nonMatchingWords2
+
+    # Helper method to split text based on regular expression
+    def joinByRegex(self, text, regex=r'[:\()/ \s,]'):
+        textSplit = re.split(regex, text)
+        textJoined = " ".join(t for t in textSplit)
+        return textJoined
+
+    # helper method to find skills using regular expressions
+    def findSkills(self, text):
+        # Holds list of possible skills based on proper nouns
+        skillsBasedOnNNP = []
+        # Step 1: define list of keywords to split by
+        baseKeywords = ["Requirements",
+                        "Require",
+                        "Qualifications",
+                        "Skills",
+                        "Experience",
+                        "Proficient",
+                        "Proficiency",
+                        "Expert",
+                        "Expertise",
+                        "Understand",
+                        "Understanding",
+                        "Familiarity",
+                        "Familiar",
+                        "Knowledge",
+                        "Knowledgeable",
+                        "Prefer",
+                        "Responsible",
+                        "Responsibilities"]
+        # Step 2: append base keywords along with the uppercase and lowercase counterparts
+        updatedKeywords = []
+        for keyword in baseKeywords:
+            updatedKeywords.append(keyword)
+            updatedKeywords.append(keyword.upper())
+            updatedKeywords.append(keyword.lower())
+
+        # Step 3: Generate regular expression
+        regex = '(?:' + '|'.join(k for k in updatedKeywords) + ')'
+
+        # Step 4: Split the text based on the regex generated
+        textSplit = re.split(regex, text)
+
+        # Step 5: iterate through split text, generate part of speech for each section, and add only the proper nouns
+        for section in textSplit:
+            sectionPOSTagged = nltk.pos_tag(section.split())
+            # Iterate through the term and tags
+            for term, tag in sectionPOSTagged:
+                if tag == "NNP":  # If the tag happens to be a proper noun add to list
+                    skillsBasedOnNNP.append(term)
+
+        return skillsBasedOnNNP
