@@ -439,7 +439,7 @@ class DataProcessor:
         return matchingWords, nonMatchingWords1, nonMatchingWords2
 
     # Helper method to split text based on regular expression
-    def joinByRegex(self, text, regex=r'[:\()/ \s,]'):
+    def joinByRegex(self, text, regex=r'[:,;."\()/ \s,]'):
         textSplit = re.split(regex, text)
         textJoined = " ".join(t for t in textSplit)
         return textJoined
@@ -466,7 +466,8 @@ class DataProcessor:
                         "Knowledgeable",
                         "Prefer",
                         "Responsible",
-                        "Responsibilities"]
+                        "Responsibilities",
+                        "Strong"]
         # Step 2: append base keywords along with the uppercase and lowercase counterparts
         updatedKeywords = []
         for keyword in baseKeywords:
@@ -478,7 +479,7 @@ class DataProcessor:
         regex = '(?:' + '|'.join(k for k in updatedKeywords) + ')'
 
         # Step 4: Split the text based on the regex generated
-        textSplit = re.split(regex, text)
+        textSplit = re.split(regex, text)[1:]
 
         # Step 5: iterate through split text, generate part of speech for each section, and add only the proper nouns
         for section in textSplit:

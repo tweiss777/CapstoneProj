@@ -29,6 +29,7 @@ def main():
 
     # load the resume up as a doc or docx file
     resumeStr = dp.process_resume("TalWeissResume.docx", False)
+    resumeStr = dp.joinByRegex(resumeStr)
 
     # This segregates the paragraphs in the resume
     resumeList = dp.process_resume("TalWeissResume.docx", True)
@@ -251,9 +252,11 @@ def main():
     # tuple that consists of job id and list of all keywords from the job only
     jobKeyWordsOnly = []
     for indice in top_indices:
-        jobKeywords = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
+        jobKeywords = dp.findSkills(jobs[indice]["description"])
+        # jobKeywords = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
         jobKeyWordsOnly.append((indice, jobKeywords))
 
+    # Counter object that keeps track of all the words in the dataset
     jobsKeyWordCount = Counter()
     for job_id, terms in jobKeyWordsOnly:
         for term in terms:
@@ -293,7 +296,7 @@ def main():
     # retrieve the intersection of the words from each of the top 5 jobs with the proper nouns (L3)
     matchingProperNounsPerTop5Jobs = []
     for indice in top_5_indices:
-        nnps = dp.filter_pos(processed_jobs_all_bigrams[indice]["description"], POS_to_keep=["NNP"])
+        nnps = dp.findSkills(jobs[indice]["description"])
         nnps = [t.lower() for t in nnps]
         matchingProperNounsPerTop5Jobs.append((indice, properNounsSet.intersection(set(nnps))))
 
@@ -319,7 +322,7 @@ def main():
 
     # filter for non matching terms with a threshold greater than 0.5%
     sortedNonMatches = sorted(nonMatches, key=lambda x: jobsKeyWordCount[x])
-    sortedNonMatchesFiltered = [t for t in sortedNonMatches if (jobsKeyWordCount[t] / totalWordsInJobSet) * 100 < 0.5]
+    sortedNonMatchesFiltered = [t for t in sortedNonMatches if (jobsKeyWordCount[t] / totalWordsInJobSet) * 100 <= 0.5]
 
     # Split sortedNonMatchesFiltered based on this regular expression '[:\() \s]'
     sortedNonMatchesFilteredSplit = [regex.split(r'[:\()/ \s]', nonMatch) for nonMatch in sortedNonMatchesFiltered]
@@ -331,11 +334,24 @@ def main():
             if t.lower() not in intersectionResumeJobs:
                 possibleMissingSkills.append(t)
 
+    # Create a dictionary that holds bool value indicating a lower case occurence of proper noun
+    lowerCaseOccurence = {}
+    for term in possibleMissingSkills:
+        lowerCaseOccurence[term] = False
+
+    # search the dataset for lowercase occurences and change dict values to true if there is a lowercase occurence
+    for term, value in lowerCaseOccurence.items():
+        for i in range(len(processed_jobs_all_bigrams)):
+            if term.lower() in processed_jobs_all_bigrams[i]["description"]:
+                lowerCaseOccurence[term] = True
+
+    possibleMissingSkillsUpdated = [t for t in possibleMissingSkills if lowerCaseOccurence[t] is not True]
+
     print("Intersection between resume and job set (matching terms from both resume and the jobs)")
     pprint(properNounsResumeNTop5Jobs)
 
     print("Possible missing skills\n")
-    pprint(possibleMissingSkills)
+    pprint(possibleMissingSkillsUpdated)
 
 
 main()

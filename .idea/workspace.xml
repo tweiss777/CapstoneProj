@@ -19,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3378">
-              <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
+            <state relative-caret-position="553">
+              <caret line="347" column="86" lean-forward="true" selection-start-line="347" selection-start-column="86" selection-end-line="347" selection-end-column="86" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -31,14 +31,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataProcessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="464" column="31" selection-start-line="464" selection-start-column="31" selection-end-line="464" selection-end-column="31" />
-              <folding>
-                <element signature="e#20#29#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="382">
+              <caret line="469" column="31" selection-start-line="469" selection-start-column="31" selection-end-line="469" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1411">
+              <caret line="89" column="48" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -54,16 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pop</find>
-      <find>people</find>
-      <find>google</find>
-      <find>kwi</find>
-      <find>2222</find>
-      <find>2222)</find>
-      <find>look</find>
-      <find>looking</find>
-      <find>job</find>
-      <find>#</find>
       <find>wor</find>
       <find>tokenize</find>
       <find>32) Java UI developer/ NYC</find>
@@ -84,6 +80,16 @@
       <find>found</find>
       <find>qualif</find>
       <find>print</find>
+      <find>write</find>
+      <find>CICS</find>
+      <find>JSP</find>
+      <find>security</find>
+      <find>applet</find>
+      <find>basic</find>
+      <find>build</find>
+      <find>xml</find>
+      <find>develop</find>
+      <find>aa</find>
     </findStrings>
     <replaceStrings>
       <replace>matchingKeyWordsPerJob</replace>
@@ -109,8 +115,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-14" />
     <option name="width" value="1280" />
     <option name="height" value="714" />
   </component>
@@ -579,22 +585,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="714" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Structure" order="0" sideWeight="0.56663054" side_tool="true" visible="true" weight="0.17474186" />
+      <window_info id="Structure" order="0" sideWeight="0.56663054" side_tool="true" visible="true" weight="0.1743941" />
       <window_info id="Favorites" order="1" sideWeight="0.56369424" side_tool="true" weight="0.19936457" />
       <window_info content_ui="combo" id="Project" order="2" sideWeight="0.43336946" weight="0.12961012" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291536" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4410959" />
-      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" weight="0.34726688" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4409534" />
+      <window_info anchor="bottom" x="0" y="45" width="1280" height="708" id="Debug" maximized="true" order="3" weight="0.34669557" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947312" weight="0.3260188" />
-      <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.3260188" />
+      <window_info anchor="bottom" x="-86" y="409" width="1898" height="303" id="Terminal" order="8" weight="0.32502708" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.18506752" side_tool="true" weight="0.47596154" />
-      <window_info active="true" anchor="bottom" x="0" y="45" width="1280" height="692" id="Python Console" maximized="true" order="10" sideWeight="0.81493247" visible="true" weight="0.44855306" />
+      <window_info active="true" anchor="bottom" x="210" y="255" width="1280" height="692" id="Python Console" order="10" sideWeight="0.81493247" visible="true" weight="0.5417118" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -699,13 +705,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/DataProcessor.py</url>
-          <line>407</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DataProcessor.py</url>
-          <line>415</line>
-          <option name="timeStamp" value="36" />
+          <line>54</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -790,13 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1023">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Caches/PyCharmCE2018.3/python_stubs/-2010535109/builtins.py" />
     <entry file="file://$USER_HOME$/KiteOnboarding.py" />
     <entry file="file://$PROJECT_DIR$/RakeFunctions.py">
@@ -815,22 +809,26 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/gensim/utils.py" />
-    <entry file="file://$PROJECT_DIR$/Driver.py">
+    <entry file="file://$PROJECT_DIR$/IndeedAPI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3378">
-          <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1411">
+          <caret line="89" column="48" selection-start-line="89" selection-start-column="48" selection-end-line="89" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataProcessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="464" column="31" selection-start-line="464" selection-start-column="31" selection-end-line="464" selection-end-column="31" />
+        <state relative-caret-position="382">
+          <caret line="469" column="31" selection-start-line="469" selection-start-column="31" selection-end-line="469" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Driver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="347" column="86" lean-forward="true" selection-start-line="347" selection-start-column="86" selection-end-line="347" selection-end-column="86" />
           <folding>
-            <element signature="e#20#29#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
