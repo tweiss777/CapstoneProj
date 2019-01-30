@@ -7,6 +7,30 @@ from gensim.summarization import keywords
 
 from DataProcessor import *
 
+'''Helper function to check for either stemmed or unstemmed terms and return a list of unique
+terms found either stemmed or unstemmed'''
+
+
+# Note: terms in setToCompareWith should be lower cased for best results
+def filterByStemming(termsToStem, setToCompareWith):
+    stemmer = nltk.PorterStemmer()
+
+    stemmedRegTerms = []
+    uniqueTerms = []
+
+    for term in termsToStem:
+        stemmedTerm = stemmer.stem(term)
+        if stemmedTerm[-1] == "'":
+            stemmedTerm = stemmedTerm.replace(stemmedTerm[-1], "")
+        stemmedRegTerms.append((stemmedTerm, term.lower()))
+
+    for stemmedTerm, regTerm in stemmedRegTerms:
+        if stemmedTerm in setToCompareWith:
+            uniqueTerms.append(stemmedTerm)
+        elif regTerm in setToCompareWith:
+            uniqueTerms.append(regTerm)
+    return uniqueTerms
+
 
 def main():
     containsNumsSpecialChars = r'^[!@#$%^&*(),.?":{}|<>0-9]*$'
