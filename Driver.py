@@ -9,8 +9,6 @@ from DataProcessor import *
 
 '''Helper function to check for either stemmed or unstemmed terms and return a list of unique
 terms found either stemmed or unstemmed'''
-
-
 # Note: terms in setToCompareWith should be lower cased for best results
 def filterByStemming(termsToStem, setToCompareWith):
     stemmer = nltk.PorterStemmer()
@@ -20,16 +18,16 @@ def filterByStemming(termsToStem, setToCompareWith):
 
     for term in termsToStem:
         stemmedTerm = stemmer.stem(term)
-        if stemmedTerm[-1] == "'":
+        if stemmedTerm[-1] == "'" or stemmedTerm[-1] == "’":
             stemmedTerm = stemmedTerm.replace(stemmedTerm[-1], "")
+        print("Appending " + "(" + stemmedTerm + "," + term.lower() + ")")
         stemmedRegTerms.append((stemmedTerm, term.lower()))
 
-    for stemmedTerm, regTerm in stemmedRegTerms:
-        if stemmedTerm in setToCompareWith:
-            uniqueTerms.append(stemmedTerm)
-        elif regTerm in setToCompareWith:
-            uniqueTerms.append(regTerm)
+    for i, (stemmedTerm, regTerm) in enumerate(stemmedRegTerms):
+        if stemmedTerm not in setToCompareWith and regTerm not in setToCompareWith:
+            uniqueTerms.append(termsToStem[i])
     return uniqueTerms
+
 
 
 def main():
@@ -371,11 +369,12 @@ def main():
 
     possibleMissingSkillsUpdated = [t for t in possibleMissingSkills if lowerCaseOccurence[t] is not True]
 
+    possibleMissingSkillsUpdated2 = filterByStemming(possibleMissingSkillsUpdated, resumeProperNounsSet)
     print("Intersection between resume and job set (matching terms from both resume and the jobs)")
     pprint(properNounsResumeNTop5Jobs)
 
     print("Possible missing skills\n")
-    pprint(possibleMissingSkillsUpdated)
+    pprint(possibleMissingSkillsUpdated2)
 
 
 main()
