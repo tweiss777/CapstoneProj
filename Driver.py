@@ -373,8 +373,23 @@ def main():
     print("Intersection between resume and job set (matching terms from both resume and the jobs)")
     pprint(properNounsResumeNTop5Jobs)
 
+
     print("Possible missing skills\n")
     pprint(possibleMissingSkillsUpdated2)
+
+    print("Matching skills and keywords per job")
+    for jobID, matchingSkills in properNounsResumeNTop5Jobs:
+        print("\nSkills/keywords that match %s" % jobs[jobID]["title"])
+        for skill in matchingSkills:
+            print(skill)
+
+    print("\nMissing skills/keywords per job")
+    for job, nonMatches in nonMatchesPerTop5Jobs:
+        print("\nwhat you are missing for %s" % jobs[job]["title"])
+        for term in possibleMissingSkillsUpdated2:
+            if term.lower() in nonMatches:
+                print(term)
+
 
 
 main()

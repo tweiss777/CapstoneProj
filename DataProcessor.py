@@ -439,7 +439,7 @@ class DataProcessor:
         return matchingWords, nonMatchingWords1, nonMatchingWords2
 
     # Helper method to split text based on regular expression
-    def joinByRegex(self, text, regex=r'[:,;."\()/ \s,]'):
+    def joinByRegex(self, text, regex=r'[:,-;."\()/ \s,]'):
         textSplit = re.split(regex, text)
         textJoined = " ".join(t for t in textSplit)
         return textJoined
@@ -449,7 +449,8 @@ class DataProcessor:
         # Holds list of possible skills based on proper nouns
         skillsBasedOnNNP = []
         # Step 1: define list of keywords to split by
-        baseKeywords = ["Requirements",
+        baseKeywords = ["Overview",
+                        "Requirements",
                         "Require",
                         "Qualifications",
                         "Skills",
