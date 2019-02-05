@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28bd4cda-1d3d-4ce4-9ff3-93be65ab6b7b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CapstoneProj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CapstoneProj.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProcessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Driver.py" beforeDir="false" afterPath="$PROJECT_DIR$/Driver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IndeedAPI.py" beforeDir="false" afterPath="$PROJECT_DIR$/IndeedAPI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Driver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="320" column="21" selection-start-line="320" selection-start-column="21" selection-end-line="320" selection-end-column="21" />
+            <state relative-caret-position="27">
+              <caret line="320" column="23" selection-start-line="320" selection-start-column="23" selection-end-line="320" selection-end-column="23" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -37,9 +32,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-588">
               <caret line="437" column="42" selection-start-line="437" selection-start-column="42" selection-end-line="437" selection-end-column="42" />
-              <folding>
-                <element signature="e#20#29#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -567,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548259766531</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="removed unnecessary print statements&#10;created dictionary to be exported as json to web app.">
+      <created>1549404778635</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1549404778635</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView">
@@ -581,7 +580,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="712" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.5689655" side_tool="true" visible="true" weight="0.19301033" />
       <window_info id="Favorites" order="1" sideWeight="0.56369424" side_tool="true" weight="0.19936457" />
@@ -662,7 +660,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed requirements from json data" />
     <MESSAGE value="two comments added on lines 6-7" />
     <MESSAGE value="created dictionary that holds the words stripped of stopwords" />
     <MESSAGE value="added an extra loop" />
@@ -687,7 +684,8 @@
     <MESSAGE value="filtered special characters when extracting matching and non-matching keywords" />
     <MESSAGE value="added comments&#10;created dictionaries holding occurences of each term for terms found in both resume and job and terms found in only jobs" />
     <MESSAGE value="Cleaned up unused code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up unused code" />
+    <MESSAGE value="removed unnecessary print statements&#10;created dictionary to be exported as json to web app." />
+    <option name="LAST_COMMIT_MESSAGE" value="removed unnecessary print statements&#10;created dictionary to be exported as json to web app." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -811,16 +809,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-588">
           <caret line="437" column="42" selection-start-line="437" selection-start-column="42" selection-end-line="437" selection-end-column="42" />
-          <folding>
-            <element signature="e#20#29#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Driver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="320" column="21" selection-start-line="320" selection-start-column="21" selection-end-line="320" selection-end-column="21" />
+        <state relative-caret-position="27">
+          <caret line="320" column="23" selection-start-line="320" selection-start-column="23" selection-end-line="320" selection-end-column="23" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
