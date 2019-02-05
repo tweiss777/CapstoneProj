@@ -33,7 +33,6 @@ class DataProcessor:
                 isEmptyArr.append(False)
 
         for i in range(len(resume)):
-            # print("%s " % resume[i] + "||| % s" % isEmptyArr[i])
             if isEmptyArr[i] is not True:
                 section += resume[i]
             else:
@@ -82,7 +81,7 @@ class DataProcessor:
                     if len(text) == 0:
                         fullText.remove(text)
                 except IndexError:
-                    print("Could not pop indice...")
+                    pass
             # iterate through the fullText array and strip \n and \t
             for i in range(len(fullText)):
                 fullText[i] = re.sub("\s+", " ",
@@ -113,7 +112,7 @@ class DataProcessor:
                     if len(resumeNoStopWords[i]) < 2 and resumeNoStopWords[i][0] in '()~><?'';":\/|{},[]@6&*-_':
                         resumeNoStopWords.remove(resumeNoStopWords[i])
                 except IndexError:
-                    print("Could not pop indice...")
+                    pass
             # retrieve parts of speech from each term in the resume, keeping only nouns verbs and adjectives
             resumeNoStopWords = " ".join(w for w in resumeNoStopWords if len(w) > 0)
 
@@ -151,7 +150,7 @@ class DataProcessor:
                             0] in '()~><?'';":\/|{},[]@6&*-_':
                             resumeNoStopWords[i].remove(resumeNoStopWords[i][j])
                     except IndexError:
-                        print("Could not pop indice...")
+                        pass
 
             resumePOSTags = [nltk.pos_tag(word_tokenize(" ".join(w for w in section))) for section in resumeNoStopWords]
             for i, line in enumerate(resumePOSTags):
@@ -201,7 +200,6 @@ class DataProcessor:
             jobPOS = nltk.pos_tag(jobsNoStopWords[i]["description"])
             for w in jobPOS:
                 if w[1] not in POSToKeep:
-                    print("found %s" % w[1])
                     jobPOS.remove(w)
             jobsNoStopWordsUpdated[i]["description"] = [w[0] for w in jobPOS]
 
@@ -227,7 +225,6 @@ class DataProcessor:
                 paragraphPOS = nltk.pos_tag(jobs[i]["description"][j])
                 for word in paragraphPOS:
                     if word[1] not in POSToKeep:
-                        print("found %s" % word[1])
                         paragraphPOS.remove(word)
             jobs[i]["description"][j] = [word[0] for word in paragraphPOS if
                                          len(word[0]) > 1 and word[0] not in punctuation]
@@ -355,7 +352,7 @@ class DataProcessor:
             for j in range(len(dataset[i]["description"])):
                 dataset[i]["description"][j] = word_tokenize(dataset[i]["description"][j])
 
-        print("adding bigrams\n")
+
 
 
         for i in range(len(dataset)):
@@ -365,7 +362,6 @@ class DataProcessor:
                 for bi in bigrams:
                     bigramstr = bi[0] + " " + bi[1]
                     if bigramstr in updated_bigrams:
-                        print("appending %s" % bigramstr)
                         dataset[i]["description"][j].append(bigramstr)
 
             # Returns the dataset where the description is turned into a list of lists of strings
@@ -439,7 +435,7 @@ class DataProcessor:
         return matchingWords, nonMatchingWords1, nonMatchingWords2
 
     # Helper method to split text based on regular expression
-    def joinByRegex(self, text, regex=r'[:,;."\()/ \s,]'):
+    def joinByRegex(self, text, regex=r'[-:,;."\()/ \s,]'):
         textSplit = re.split(regex, text)
         textJoined = " ".join(t for t in textSplit)
         return textJoined

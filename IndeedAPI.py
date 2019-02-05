@@ -82,7 +82,6 @@ class IndeedAPi:
         #initialize our json data to an empty dictionary at first
         json_data = {}
         for job in jobs:
-            print("processing job %s" % job_id)
             #set an empty dictionary to the job_id key
             json_data[job_id] = {}
             #set the title key to the title found in the first part of the tuple
@@ -102,7 +101,6 @@ class IndeedAPi:
         json_data = {}
 
         for job in jobs:
-            print("Processing job %s" % job_id)
             # holds the job_id as a key :
             # {title: str, description: list of paragraphs}
             json_data[job_id] = {}
