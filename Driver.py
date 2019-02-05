@@ -39,7 +39,6 @@ def main():
     r = Rake()
     # Get the jobs from indeed.com
     jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
-    originalJobs = jobs
 
     for i in range(len(jobs)):
         jobs[i]["description"] = dp.joinByRegex(jobs[i]["description"])
@@ -376,26 +375,6 @@ def main():
 
     print("Possible missing skills\n")
     pprint(possibleMissingSkillsUpdated2)
-
-    possibleMissingSkillsLowered = [t.lower() for t in possibleMissingSkillsUpdated2]
-    for jobid, terms in nonMatchesPerTop5Jobs:
-        print("\nHere's what you are missing for %s" % jobs[jobid]["title"])
-        for term in terms:
-            if term in possibleMissingSkillsLowered:
-                print(term)
-
-    # This is what will be likely exported to the Web app.
-    json_data = {}
-    for indice in top_5_indices:
-        # Add title and description
-        json_data[indice] = {}
-        json_data[indice]["title"] = originalJobs[indice]["title"]
-        json_data[indice]["description"] = originalJobs[indice]["description"]
-        json_data[indice]["matching_keywords"] = [keyword for keyword in properNounsResumeNTop5Jobs[i][1]]
-        json_data[indice]["missing_keywords"] = [keyword for keyword in nonMatchesPerTop5Jobs[i][1] if
-                                                 keyword in possibleMissingSkillsLowered]
-
-
 
 
 main()
