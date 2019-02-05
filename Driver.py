@@ -39,7 +39,7 @@ def main():
     r = Rake()
     # Get the jobs from indeed.com
     jobs, jobs2 = dp.get_jobs("Java Developer", 11590, 10)
-
+    originalJobs = jobs
     for i in range(len(jobs)):
         jobs[i]["description"] = dp.joinByRegex(jobs[i]["description"])
 
@@ -317,7 +317,7 @@ def main():
 
     # retrieve the intersection of the words from each of the top 5 jobs with the proper nouns (L3)
     matchingProperNounsPerTop5Jobs = []
-    for indice in top_5_indices:
+    for indice in top_indices:
         nnps = dp.findSkills(jobs[indice]["description"])
         nnps = [t.lower() for t in nnps]
         matchingProperNounsPerTop5Jobs.append((indice, properNounsSet.intersection(set(nnps))))
@@ -375,6 +375,16 @@ def main():
 
     print("Possible missing skills\n")
     pprint(possibleMissingSkillsUpdated2)
+
+    json_data = {}
+    possibleMissingSkillsLowered = [t.lower() for t in possibleMissingSkillsUpdated2]
+    for i, indice in enumerate(top_indices):
+        json_data[indice] = {}
+        json_data[indice]["title"] = originalJobs[indice]["title"]
+        json_data[indice]["description"] = originalJobs[indice]["description"]
+        json_data[indice]["matching_keywords"] = [keyword for keyword in properNounsResumeNTop5Jobs[i][1]]
+        json_data[indice]["missing_keywords"] = [keyword for keyword in nonMatchesPerTop5Jobs[i][1] if
+                                                 keyword in possibleMissingSkillsLowered]
 
 
 main()
